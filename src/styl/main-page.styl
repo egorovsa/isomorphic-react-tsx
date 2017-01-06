@@ -1,0 +1,635 @@
+$main-head-height = 95px
+$main-head-height-750 = 60px
+$main-menu-height = 60px
+$title-text-color = #a5a5a5
+
+$content1000 = 1000px
+$content930 = 930px
+$content850 = 850px
+$content750 = 750px
+
+header
+footer
+	background url('./../img/bckgr_img.png')
+	background-attachment fixed
+	background-size cover
+	background-position right
+
+	.main-page-header
+		height 660px
+
+		.main-head
+			min-height $main-head-height
+
+			.logo
+				col(1 / 12)
+
+				img
+					margin-top 35px
+
+				+below($content930)
+					col(1 / 12)
+
+				+below($content750)
+					span(2 / 12)
+					height $main-head-height-750
+					border-bottom 2px solid black
+					box-sizing border-box
+
+					img
+						margin-top 18px
+
+			.name
+				col(3 / 12)
+				line-height $main-head-height
+				color #fff;
+				font-size 30px
+				text-align left
+				font-weight 500
+
+				span
+					border-left 1px solid $title-text-color
+					padding-left 30px
+
+				+below($content930)
+					col(4 / 12)
+
+					span
+						border-left 0
+
+				+below($content750)
+					span(10 / 12)
+					text-align right
+					border-bottom 2px solid black
+					height $main-head-height-750
+					line-height $main-head-height-750
+					box-sizing border-box
+
+					span
+						border-left 0
+
+			.title
+				col(5 / 12)
+				height $main-head-height
+				line-height $main-head-height - 5
+
+				span
+					color $title-text-color
+					vertical-align middle
+					line-height normal
+					display inline-block
+					font-weight normal
+
+				+below($content930)
+					col(4 / 12)
+
+					span
+						font-size 0.8em
+
+				+below($content750)
+					stack()
+					text-align center
+					height $main-head-height-750 - 10
+					line-height $main-head-height-750 - 15
+
+					span
+						font-size 1em
+
+			.phones
+				col(3 / 12)
+				color #fff
+				height $main-head-height
+				line-height $main-head-height - 5
+				text-align right
+
+				span
+					vertical-align middle;
+					line-height normal
+
+					&:before
+						content ''
+						background url('./../img/phone-icon.png') no-repeat
+						width 32px
+						height 32px
+						display inline-block
+						margin-right 10px
+						margin-bottom -10px
+
+				+below($content930)
+					col(3 / 12)
+
+					span
+						font-size 0.8em
+
+				+below($content750)
+					stack()
+					text-align center
+					height $main-head-height-750 - 10
+					line-height $main-head-height-750 - 15
+
+					span
+						font-size 1.3em
+
+		.main-menu
+			background $yellow-color
+			height $main-menu-height
+			line-height $main-menu-height
+			border-radius 3px
+			overflow hidden
+
+			.items
+				span(5 / 12)
+
+				.mobile-menu
+					display none
+					margin-left 15px
+					font-size 20px
+
+					a
+						color #000
+						text-decoration none
+
+					&:before
+						icon-font($icon-menu-bar)
+						font-weight normal
+
+				.desktop-menu
+					a
+						color #000
+						text-decoration: none
+						border-bottom 1px solid rgba(0, 0, 0, 0.2)
+						margin 0 15px
+
+						&:last-child
+							margin-right 0
+
+						&:first-child
+							margin-left 30px
+
+						&.active
+							color red
+							border 0
+
+						&:hover
+							color red
+							border 0
+
+				+below($content1000)
+					span(5 / 12)
+
+					.desktop-menu
+						a
+							margin 0 5px
+
+				+below($content850)
+					span(3 / 12)
+
+					.desktop-menu
+						display none
+
+					.mobile-menu
+						display block
+
+				+below($content750)
+					span(4 / 12)
+
+			.times
+				span(3 / 12)
+				line-height $main-menu-height - 5
+				color rgba(#000, 0.4)
+
+				span
+					display inline-block
+					line-height normal
+					vertical-align middle
+					text-align center
+					font-size 0.98em
+
+				+below($content850)
+					span(5 / 12)
+
+				+below($content750)
+					display none
+
+			.info
+				span(4 / 12)
+				columns: 3px 12px
+				background url('./../img/right-part-menu.png') no-repeat
+				background-position right
+				line-height $main-menu-height - 5
+				height $main-menu-height
+				text-align: right;
+				padding-right: 70px;
+				box-sizing: border-box;
+
+				a
+					color #000
+					display inline-block
+					line-height normal
+					vertical-align middle
+					text-decoration none
+
+					span
+						border-bottom 1px dashed black
+
+				+below($content750)
+					span(8 / 12)
+					text-align right
+
+	.main-price
+		.price-header
+			height: 100px
+			line-height 98px
+			text-align center
+			position relative
+
+			&:hover
+				&:before, &:after
+					color: $yellow-color
+
+			.slide-button
+				width 36px
+				height 36px
+				color: rgba($yellow-color, 0.3)
+				position absolute
+				font-size 36px
+				cursor pointer
+				font-weight 300
+
+				&:hover
+					color $yellow-color
+
+				&.right
+					right 0
+
+					&:before
+						icon-font($circle-right)
+
+				&.left
+					left 0
+
+					&:before
+						icon-font($circle-left)
+
+				+below($content750)
+					display none
+
+			+below($content750)
+				height 50px
+				line-height 48px
+
+			.heading
+				font-style: normal
+				font-size 24px
+				line-height normal
+				vertical-align middle
+				display inline-block
+				color rgba(#fff, 0.8)
+				position relative
+
+				+below($content750)
+					font-size 16px
+					line-height 40px
+
+				span
+					color #00caf5
+					font-size 0.75em
+					border-left 1px solid rgba(#ddd, 0.4)
+					margin-left 15px
+					padding-left 15px
+
+					&:after
+						icon-font($calendar)
+						width 16px
+						height 16px
+						font-size 0.8em
+						margin-left 5px
+
+					+below($content750)
+						display none
+		.prices
+			overflow hidden
+
+			.block-container
+				col(1 / 4)
+				box-sizing border-box
+
+				+below($content930)
+					col(1 / 2, cycle:2)
+
+				+below($content750)
+					stack()
+					padding 0
+
+				.block
+					border 1px solid rgba($yellow-color, 0.7)
+					border-radius 10px
+					height 120px
+					position relative
+					transition: background 0.3s;
+					box-sizing border-box
+					padding-left 28px
+					padding-top 28px
+
+					.name
+						color #fff
+						font-size 18px
+						margin-bottom: 18px
+
+					.price
+						color $yellow-color
+						font-size 30px
+						font-weight bold
+
+						span
+							font-size 18px
+							font-weight: 300
+
+					&:hover
+						background rgba($yellow-color, 0.4)
+
+					&:after
+						icon-font($angle-right)
+						position absolute
+						background $yellow-color
+						width 50px
+						height 40px
+						border-radius 8px 0 8px
+						bottom 0
+						right 0
+						text-align center
+						font-size 25px
+						line-height 40px
+
+					+below($content930)
+						height 60px
+						padding-top 12px
+						margin-bottom 15px
+
+						.name
+							display inline-block
+							margin 0
+							margin-right 15px
+
+						.price
+							display inline-block
+
+						&:after
+							width 45px
+							height 59px
+							line-height 60px
+							border-radius 0 8px 8px 0
+
+					+below($content750)
+						height 70px
+						padding-top 15px
+						margin-bottom 15px
+
+						&:after
+							height 69px
+							line-height 70px
+							width 55px
+
+.advantages
+	margin-top 30px
+	clear both
+
+	.addresses
+		background linear-gradient(to bottom, #f89e00, #ef7000);
+		height $addresses-height-default
+		padding 35px 45px
+		box-sizing border-box
+		margin-top -150px
+		border-radius 5px
+		position relative
+		margin-bottom 50px
+
+		&:after
+			content: ''
+			height $addresses-height-default
+			width 300px
+			position absolute
+			top 0
+			right 0
+			background url('./../img/metall-heand.png') no-repeat
+			background-position right
+			pointer-events none
+			z-index 0
+
+		.title
+			display block
+			color #fff
+			font-size 16px
+			font-weight normal
+			margin-bottom 15px
+
+		.metro-selector
+			width 80%
+			height 50px
+			border 1px solid rgba($yellow-color-light, 0.8)
+			overflow hidden
+			border-radius 5px
+			position relative
+			padding-left 15px
+			margin-bottom 30px
+			z-index 1
+
+			&:after
+				icon-font($chevron-down)
+				width 50px
+				height 50px
+				position absolute
+				right 0
+				top 0
+				color rgba($yellow-color-light, 0.8)
+				line-height 50px
+				font-size 24px
+				pointer-events none
+
+			select
+				width: 109%;
+				border: none;
+				box-shadow: none;
+				background-color: transparent;
+				background-image: none;
+				height 50px
+				font-size 24px
+				color #fff
+				font-weight 500
+
+				option
+					font-size 14px
+
+				&:focus
+					outline 0
+
+		.addresses-phones
+			color #fff
+			font-size 16px
+
+			.item
+				margin-bottom 10px
+				position relative
+				padding-left 18px
+
+				&:before
+					position: absolute;
+					width 16px
+					height 16px
+					margin-right 5px
+					color rgba($yellow-color-light, 0.8)
+					top: 50%;
+					left: 0;
+					margin-top: -8px;
+
+			.address
+				col(6 / 12)
+
+				.item
+					&:before
+						icon-font($location)
+
+			.phones
+				col(6 / 12)
+
+				.item
+					&:before
+						icon-font($phone)
+
+			+below($content930)
+				.address
+					col(8 / 12)
+
+				.phones
+					col(4 / 12)
+
+			+below($content750)
+				.address
+					stack()
+
+				.phones
+					stack()
+
+		+below($content930)
+			margin-top -250px
+
+		+below($content750)
+			margin-top -80px
+			height auto
+
+			.metro-selector
+				width 100%
+
+				select
+					font-size 16px
+
+			&:after
+				background none
+
+			.addresses-phones
+				.items
+					font-size 12px
+
+	.advant-block
+		col(1 / 3)
+
+		.left
+			col(3 / 12)
+			text-align center
+			padding-top 40px
+
+		.right
+			col(9 / 12)
+
+			.title
+				font-size 20px
+				font-weight bold
+				margin-bottom 15px
+
+			.description
+				color rgba(#000, 0.6)
+
+		+below($content750)
+			stack()
+			margin-bottom 15px
+
+			.left
+				padding-top 0
+
+	+below($content930)
+		.container
+			margin-top 0px
+
+	+below($content750)
+		.container
+			margin-top 0px
+
+.tagline
+	font-size 30px
+	color: rgba(red, 0.7)
+	text-align center
+	margin 40px 0 30px 0
+
+.map-section
+	height $map-section-height-default
+	background $yellow-color
+	box-sizing border-box
+
+	.container
+		position relative
+
+		&:after
+			content: ''
+			height $map-section-height-default
+			width 315px
+			position absolute
+			top 0
+			right 0
+			background url('./../img/magnit.png') no-repeat
+			background-position right
+			pointer-events none
+			z-index 0
+
+		.title
+			text-transform uppercase
+			font-size 24px
+			font-weight bold
+			margin-top 70px
+			margin-bottom 35px
+			position: relative;
+			z-index 2
+
+		.map
+			col(8 / 12)
+			z-index 2
+			position relative
+
+			& > div
+				border-radius 15px
+				overflow hidden
+				position relative
+
+			+below($content930)
+				col(10 / 12)
+
+			+below($content750)
+				col(1 / 1)
+
+		+below($content750)
+			&:after
+				display none
+
+			.title
+				margin-top 40px
+
+footer
+	background $footer-color
+
+	.main-page-header
+		height 90px
+
+		+below($content750)
+			height auto
+
+
+
