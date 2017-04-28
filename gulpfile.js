@@ -78,7 +78,7 @@ function bundle() {
     }
 
     bundler = bundler || browserify({
-            entries: 'src/ts/client.ts',
+            entries: 'src/ts/client.tsx',
             extensions: [
                 '.ts',
                 '.tsx'

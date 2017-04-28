@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AppComponent} from "./components/app";
 import {MainPageComponent} from "./components/pages/main-page";
 import {TestPageComponent} from "./components/pages/test-page";
@@ -12,4 +12,10 @@ let routeMap: JSX.Element = (
 );
 
 export default routeMap;
+
+export let ROUTER = (
+    <Router history={browserHistory}>
+        {routeMap}
+    </Router>
+);
 

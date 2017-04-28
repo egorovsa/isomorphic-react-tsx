@@ -20,9 +20,10 @@ export class MainPageComponent extends React.Component<Props, State> {
 
     private getAdvantages(): JSX.Element {
         return (
-            <div className="advantages">
+            <div className={"advantages"}>
                 <div className="container">
                     <AddressesBlockComponent/>
+
 
                     <div className="advant-block paid-now">
                         <div className="left">
@@ -85,6 +86,7 @@ export class MainPageComponent extends React.Component<Props, State> {
             </div>
         )
     }
+
 
     public render() {
         return (

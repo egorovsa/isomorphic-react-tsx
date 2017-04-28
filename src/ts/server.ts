@@ -4,7 +4,7 @@ import * as ReactDOMServer from 'react-dom/server';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as handlebars from 'handlebars';
-import {match, RouterContext, RouterContextProps} from 'react-router';
+import {match, RouterContext} from 'react-router';
 import routes from './router';
 
 const app = express();
@@ -33,7 +33,7 @@ app.use((req, res) => {
 function getServerHtml(renderProps: any): string {
     let indexFile = fs.readFileSync('./../index.html', "utf-8");
     let template = handlebars.compile(indexFile);
-    let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, renderProps as RouterContextProps));
+    let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, renderProps));
 
     return template({componentHtml: componentHTML});
 }
