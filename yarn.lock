@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@types/es6-shim@^0.31.33":
-  version "0.31.33"
-  resolved "https://registry.yarnpkg.com/@types/es6-shim/-/es6-shim-0.31.33.tgz#4792bdecc8c7f09a7e086968cfbb8058e459379d"
+"@types/es6-promise@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
 
 "@types/express-serve-static-core@*":
   version "4.0.40"
@@ -1555,6 +1555,18 @@ fancy-log@^1.0.0, fancy-log@^1.1.0:
 fbjs@^0.8.1, fbjs@^0.8.4:
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.8.tgz#02f1b6e0ea0d46c24e0b51a2d24df069563a5ad6"
+  dependencies:
+    core-js "^1.0.0"
+    isomorphic-fetch "^2.1.1"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    setimmediate "^1.0.5"
+    ua-parser-js "^0.7.9"
+
+fbjs@^0.8.9:
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
     core-js "^1.0.0"
     isomorphic-fetch "^2.1.1"
@@ -3936,6 +3948,12 @@ prompt@^1.0.0:
     utile "0.3.x"
     winston "2.1.x"
 
+prop-types@^15.5.7:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
+
 proxy-addr@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.2.tgz#b4cc5f22610d9535824c123aef9d3cf73c40ba37"
@@ -4044,6 +4062,12 @@ react-router@^3.0.0:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
+react-stores@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-stores/-/react-stores-1.1.9.tgz#9ee7e41ad4b2febc21dc841a7270dff5dcf36a15"
+  dependencies:
+    react "^15.4.2"
+
 react@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.1.tgz#498e918602677a3983cd0fd206dfe700389a0dd6"
@@ -4051,6 +4075,15 @@ react@^15.4.1:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+react@^15.4.2:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.7"
 
 read-all-stream@^3.0.0:
   version "3.1.0"

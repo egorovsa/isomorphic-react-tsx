@@ -30,11 +30,12 @@ const exorcist = require('exorcist');
 const argv = require('yargs').argv;
 const tsify = require('tsify');
 const ts = require('gulp-typescript');
+const colors = require('colors');
 
 const version = packageData.version;
 const port = 3000;
 
-const production = (argv.development === undefined) ? true : false;
+const production = (argv.dev === undefined) ? true : false;
 
 const vendors = [
     'history',
@@ -248,9 +249,11 @@ gulp.task('default', ['webroot'], function () {
     startExpress(port + 1);
 
     gulp.watch([
-        './src/ts/server.ts',
+        'src/ts/server.ts',
     ], function () {
         typeScriptCompile();
+
+        console.log('Server build'.blue);
     });
 
     gulp.watch([

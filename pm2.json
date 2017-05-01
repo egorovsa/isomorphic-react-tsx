@@ -1,0 +1,7 @@
+{
+  "apps" : [{
+    "name"        : "Windows webinstaller creator",
+    "script"      : "./dist/server/server.js",
+    "watch"       : true
+  }]
+}
