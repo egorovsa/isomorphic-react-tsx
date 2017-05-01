@@ -58,6 +58,7 @@
     "@types/superagent": "^2.0.36",
     "browserify": "^13.1.1",
     "colors": "^1.1.2",
+    "es6-promise": "^4.1.0",
     "history": "3.0.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

@@ -6,6 +6,8 @@ import * as path from 'path';
 import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
 import routes from './router';
+import {API} from "./api";
+import {PagesStore} from "./stores/pages";
 
 const app = express();
 
@@ -24,15 +26,24 @@ app.use((req, res) => {
 				return res.status(301).send(nextLocation.pathname + nextLocation.search);
 			}
 
+			if (nextState && nextState.params) {
+				API.getPageData(nextState.params['slug']).then((data: PagesStore.Page) => {
+					let pages = PagesStore.store.state.pages.concat([]);
 
-			if (nextState && nextState.location) {
-				console.log(nextState.location);
-			}
+					pages.push(data);
 
-			if (nextState) {
-				return res.end(getServerHtml(nextState));
+					PagesStore.store.setState({
+						pages: pages
+					} as PagesStore.State);
+
+					return res.end(getServerHtml(nextState));
+				})
 			} else {
-				return res.status(404).send('Not found');
+				if (nextState) {
+					return res.end(getServerHtml(nextState));
+				} else {
+					return res.status(404).send('Not found');
+				}
 			}
 		} else {
 			return res.status(500).send(error.message);
@@ -41,7 +52,7 @@ app.use((req, res) => {
 });
 
 function getServerHtml(nextState: any): string {
-	let indexFile = fs.readFileSync(path.join(__dirname,'./../index.html'), "utf-8");
+	let indexFile = fs.readFileSync(path.join(__dirname, './../index.html'), "utf-8");
 	let template = handlebars.compile(indexFile);
 	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, nextState));
 
