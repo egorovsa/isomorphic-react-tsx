@@ -6,7 +6,7 @@ import {PagesComponent} from "./components/pages/test-page";
 
 let routeMap: JSX.Element = (
 	<Route path="/" component={AppComponent}>
-		<IndexRoute component={MainPageComponent} onEnter={(routeData)=>{
+		<IndexRoute component={MainPageComponent} onEnter={(routeData) => {
 			// console.log(routeData);
 		}}/>
 		<Route path="/pages/:slug" component={PagesComponent}/>

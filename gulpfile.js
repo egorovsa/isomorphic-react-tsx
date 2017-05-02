@@ -179,7 +179,10 @@ function fonts() {
 function baseHtml() {
     let templateData = {
         version: version,
-        componentHtml: '{{{componentHtml}}}'
+        componentHtml: '{{{componentHtml}}}',
+        title: '{{{title}}}',
+        keywords: '{{{keywords}}}',
+        description: '{{{description}}}',
     };
 
     let options = {};

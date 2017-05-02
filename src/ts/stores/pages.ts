@@ -12,11 +12,18 @@ export namespace PagesStore {
 	}
 
 	export interface State {
-		pages: Page[]
+		page: Page
 	}
 
 	let initialState: State = {
-		pages: []
+		page: {
+			id: 0,
+			title: '',
+			description: '',
+			keywords: '',
+			content: '',
+			active: true
+		}
 	};
 
 	export let store: Store<State> = new Store<State>(initialState);

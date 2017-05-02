@@ -1,6 +1,6 @@
 {
   "apps" : [{
-    "name"        : "Windows webinstaller creator",
+    "name"        : "Isomorphic react",
     "script"      : "./dist/server/server.js",
     "watch"       : true
   }]

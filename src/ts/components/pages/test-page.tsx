@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Store, StoreComponent} from "react-stores";
 import {PagesStore} from "../../stores/pages";
 import {API} from "../../api";
+import {PagesActions} from "../../actions/PagesAction";
 
 export interface Props {
 	params?: any
@@ -23,29 +24,13 @@ export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 	}
 
 	storeComponentDidMount() {
-		API.getPageData(this.props.params['slug']).then((data: PagesStore.Page) => {
-			let pages = this.stores.pages.state.pages.concat([]);
-
-			pages.push(data);
-
-			this.stores.pages.setState({
-				pages: pages
-			});
-		})
-	}
-
-	private getContent() {
-		if (this.stores.pages.state.pages[0]) {
-			return this.stores.pages.state.pages[0].content;
-		}
-
-		return '';
+		PagesActions.pagesCommonData(this.props.params['slug']);
 	}
 
 	public render() {
 		return (
 			<div>
-				{this.getContent()}
+				{this.stores.pages.state.page.content}
 			</div>
 		);
 	}
