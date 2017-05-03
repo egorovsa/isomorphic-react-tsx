@@ -26,6 +26,7 @@ export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 	public render() {
 		return (
 			<div>
+				PagesComponent
 				{this.stores.pages.state.page.content}
 			</div>
 		);

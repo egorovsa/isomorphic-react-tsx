@@ -4,9 +4,10 @@ import {TestComponent} from "../components/pages/test-component";
 import {PagesComponent} from "../components/pages/pages-component";
 import {AppController} from "./app-controller";
 import {PagesActions} from "../actions/PagesAction";
+import {API} from "../api";
+import {PagesStore} from "../stores/pages";
 
 export class PagesController extends AppController {
-
 	constructor(data) {
 		super(data);
 	}
@@ -15,15 +16,25 @@ export class PagesController extends AppController {
 
 	}
 
-	public page() {
-		PagesActions.pagesCommonData(this.data.params['action']);
+	public page(callback?: (component) => void) {
+		console.log('page pages data', this);
 
-		return this.render(TestComponent);
+		API.getPageData(this.data.params['action']).then((data: PagesStore.Page) => {
+			PagesStore.store.setState({
+				page: data
+			} as PagesStore.State);
+
+			if (callback) {
+				callback(this.render(PagesComponent))
+			}
+		});
+
+		return this.render(PagesComponent);
 	}
 
 	public page1() {
 		PagesActions.pagesCommonData(this.data.params['action']);
 
-		return this.render(PagesComponent);
+		return this.render(TestComponent);
 	}
 }

@@ -6,9 +6,8 @@ import * as path from 'path';
 import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
 import routes from './router';
-import {PagesActions} from "./actions/PagesAction";
 import {CommonActions} from "./actions/CommonActions";
-import {PagesStore} from "./stores/pages";
+import {Controllers} from "./controllers/controllers";
 
 const app = express();
 
@@ -35,7 +34,7 @@ app.use((req, res, next) => {
 
 app.use((req, res) => {
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
-		metadata.title="test";
+		metadata.title = "test";
 
 		if (!error) {
 			if (nextLocation) {
@@ -43,7 +42,13 @@ app.use((req, res) => {
 			}
 
 			if (nextState) {
-				return res.end(getServerHtml(nextState));
+				let controllers = new Controllers(nextState);
+
+				controllers.isPage(nextState.params['controller'], nextState.params['action'], () => {
+					controllers[nextState.params['controller']][nextState.params['action']](() => {
+						return res.end(getServerHtml(nextState));
+					});
+				});
 			} else {
 				return res.status(404).send('Not found');
 			}

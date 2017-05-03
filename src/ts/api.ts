@@ -23,6 +23,11 @@ export class API {
 			};
 
 			if (data[slug]) {
+
+				setTimeout(()=>{
+
+				}, 5000);
+
 				resolve(data[slug]);
 			} else {
 				resolve(

@@ -28,7 +28,7 @@ export class TestComponent extends StoreComponent<Props, State, StoresState> {
 	public render() {
 		return (
 			<div>
-				test
+				TestComponent
 			</div>
 		);
 	}

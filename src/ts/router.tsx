@@ -3,6 +3,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AppComponent} from "./components/app";
 import {MainPageComponent} from "./components/pages/main-page";
 import {Controllers} from "./controllers/controllers";
+import {TestComponent} from "./components/pages/test-component";
 
 let routeMap: JSX.Element = (
 	<Route path="/" component={AppComponent}>
@@ -11,17 +12,12 @@ let routeMap: JSX.Element = (
 		<Route path="/:controller/:action" onEnter={(data) => {
 			let controllers = new Controllers(data);
 
-			if (controllers[data.params['controller']]) {
-				if (controllers[data.params['controller']][data.params['action']]) {
-					data.routes[1].component = () => {
-						return controllers[data.params['controller']][data.params['action']]();
-					}
-				} else {
-
+			controllers.isPage(data.params['controller'], data.params['action'], () => {
+				data.routes[1].component = () => {
+					return controllers[data.params['controller']][data.params['action']]()
 				}
-			} else {
+			});
 
-			}
 		}}/>
 
 
