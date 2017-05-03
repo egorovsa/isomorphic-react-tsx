@@ -15,10 +15,11 @@ export class AppComponent extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                <SideNavComponent/>
-                <HeaderComponent/>
+				<h1>MainLayout</h1>
+                {/*<SideNavComponent/>*/}
+                {/*<HeaderComponent/>*/}
                 {this.props.children}
-                <FooterComponent/>
+                {/*<FooterComponent/>*/}
             </div>
         );
     }

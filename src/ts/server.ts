@@ -33,28 +33,10 @@ app.use((req, res, next) => {
 	});
 });
 
-app.use((req, res, next) => {
-	match({routes, location: req.url}, (error, nextLocation, nextState) => {
-		if (!error) {
-			if (nextState && nextState.params && nextState.params['slug']) {
-				PagesActions.pagesCommonData(nextState.params['slug'], (page: PagesStore.Page) => {
-					metadata.title = page.title;
-					metadata.keywords = page.keywords;
-					metadata.description = page.description;
-
-					return res.end(getServerHtml(nextState));
-				});
-			} else {
-				next();
-			}
-		} else {
-			return res.status(500).send(error.message);
-		}
-	});
-});
-
 app.use((req, res) => {
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
+		metadata.title="test";
+
 		if (!error) {
 			if (nextLocation) {
 				return res.status(301).send(nextLocation.pathname + nextLocation.search);

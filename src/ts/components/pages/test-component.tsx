@@ -16,21 +16,19 @@ export interface StoresState {
 	pages: Store<PagesStore.State>
 }
 
-export class PagesComponent extends StoreComponent<Props, State, StoresState> {
+export class TestComponent extends StoreComponent<Props, State, StoresState> {
 	constructor() {
 		super({
 			pages: PagesStore.store
 		});
 	}
 
-	storeComponentDidMount() {
-		PagesActions.pagesCommonData(this.props.params['slug']);
-	}
+
 
 	public render() {
 		return (
 			<div>
-				{this.stores.pages.state.page.content}
+				test
 			</div>
 		);
 	}
