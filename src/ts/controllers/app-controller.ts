@@ -1,21 +1,9 @@
 import * as React from "react";
-import {AppComponent} from "../components/app";
+import {Controller} from "../lib/controllers/controller";
 
-export class AppController {
-
+export class AppController extends Controller {
 	constructor(data) {
-		this.data = data;
-		this.layout = React.createElement(AppComponent, this.data);
+		super(data);
 	}
 
-	public data;
-	public layout;
-
-	public setLayout(component) {
-		this.layout = React.createElement(component, this.data);
-	}
-
-	public render(component) {
-		return React.createElement(component, this.data);
-	}
 }
