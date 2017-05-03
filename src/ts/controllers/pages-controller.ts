@@ -23,6 +23,6 @@ export class PagesController extends AppController {
 
 	public page1() {
 		PagesActions.pagesCommonData(this.data.params['action']);
-		return this.render(TestComponent);
+		return this.render(PagesComponent);
 	}
 }

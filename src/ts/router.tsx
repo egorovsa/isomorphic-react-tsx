@@ -21,7 +21,7 @@ let routeMap: JSX.Element = (
 			// PagesActions.pagesCommonData(data.params['action']);
 
 			data.routes[1].component = () => {
-				return controllers[data.params['controller']]().page1();
+				return controllers.pages().page();
 
 			}
 
