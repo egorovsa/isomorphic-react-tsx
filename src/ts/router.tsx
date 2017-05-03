@@ -2,8 +2,6 @@ import * as React from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AppComponent} from "./components/app";
 import {MainPageComponent} from "./components/pages/main-page";
-import {PagesComponent} from "./components/pages/pages-component";
-import {PagesActions} from "./actions/PagesAction";
 import {Controllers} from "./controllers/controllers";
 
 let routeMap: JSX.Element = (
@@ -11,20 +9,19 @@ let routeMap: JSX.Element = (
 		<IndexRoute component={MainPageComponent}/>
 
 		<Route path="/:controller/:action" onEnter={(data) => {
-
-			
-			console.log(data);
 			let controllers = new Controllers(data);
 
-			// console.log(controllers[data.params['controller']]);
+			if (controllers[data.params['controller']]) {
+				if (controllers[data.params['controller']][data.params['action']]) {
+					data.routes[1].component = () => {
+						return controllers[data.params['controller']][data.params['action']]();
+					}
+				} else {
 
-			// PagesActions.pagesCommonData(data.params['action']);
-
-			data.routes[1].component = () => {
-				return controllers.pages().page();
+				}
+			} else {
 
 			}
-
 		}}/>
 
 

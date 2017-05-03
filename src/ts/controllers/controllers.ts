@@ -5,9 +5,8 @@ export class Controllers {
 
 	constructor(data) {
 		this.data = data;
+		this.pages = new PagesController(data);
 	}
 
-	public pages() {
-		return new PagesController(this.data);
-	}
+	public pages;
 }
