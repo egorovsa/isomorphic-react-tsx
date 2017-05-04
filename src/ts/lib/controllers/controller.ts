@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AppComponent} from "../../components/app";
+import {AppComponent} from "../../components/laouts/app";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
 

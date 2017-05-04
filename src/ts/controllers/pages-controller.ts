@@ -1,12 +1,10 @@
-import {AppComponent} from "../components/app";
-import * as React from "react";
 import {TestComponent} from "../components/pages/test-component";
 import {PagesComponent} from "../components/pages/pages-component";
 import {AppController} from "./app-controller";
 import {PagesActions} from "../actions/PagesAction";
 import {API} from "../api";
 import {PagesStore} from "../stores/pages";
-import {App1Component} from "../components/app1";
+import {App1Component} from "../components/laouts/app1";
 
 export class PagesController extends AppController {
 	constructor(data) {
