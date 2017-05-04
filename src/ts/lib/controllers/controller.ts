@@ -1,20 +1,38 @@
 import * as React from "react";
 import {AppComponent} from "../../components/app";
+import {CommonStore} from "../../stores/common";
+import MetaData = CommonStore.MetaData;
 
 export class Controller {
 	constructor(data) {
 		this.data = data;
-		this.layout = React.createElement(AppComponent, this.data);
 	}
 
 	public data;
-	public layout;
 
-	public setLayout(component) {
-		this.layout = React.createElement(component, this.data);
+	public render(component: React.ComponentClass<any>, layout?: React.ComponentClass<any>) {
+		return {
+			component: component,
+			layout: layout ? layout : null
+		}
 	}
 
-	public render(component) {
-		return React.createElement(component, this.data);
+	private metaData(metaData: MetaData): void {
+		let newMetaData: MetaData = {...CommonStore.store.state.metadata};
+		if (metaData.title) {
+			newMetaData.title = metaData.title
+		}
+
+		if (metaData.description) {
+			newMetaData.description = metaData.description
+		}
+
+		if (metaData.keywords) {
+			newMetaData.keywords = metaData.keywords
+		}
+
+		CommonStore.store.setState({
+			metadata: newMetaData
+		} as CommonStore.State);
 	}
 }

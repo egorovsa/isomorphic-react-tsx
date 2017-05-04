@@ -28,6 +28,7 @@ export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 			<div>
 				PagesComponent
 				{this.stores.pages.state.page.content}
+				{this.props.children}
 			</div>
 		);
 	}

@@ -6,6 +6,7 @@ import {AppController} from "./app-controller";
 import {PagesActions} from "../actions/PagesAction";
 import {API} from "../api";
 import {PagesStore} from "../stores/pages";
+import {App1Component} from "../components/app1";
 
 export class PagesController extends AppController {
 	constructor(data) {
@@ -13,11 +14,10 @@ export class PagesController extends AppController {
 	}
 
 	public index() {
-
+		return this.render(TestComponent);
 	}
 
 	public page(callback?: (component) => void) {
-		console.log('page pages data', this);
 
 		API.getPageData(this.data.params['action']).then((data: PagesStore.Page) => {
 			PagesStore.store.setState({
@@ -25,11 +25,11 @@ export class PagesController extends AppController {
 			} as PagesStore.State);
 
 			if (callback) {
-				callback(this.render(PagesComponent))
+				callback(this.render(PagesComponent, App1Component))
 			}
 		});
 
-		return this.render(PagesComponent);
+		return this.render(PagesComponent, App1Component);
 	}
 
 	public page1() {
