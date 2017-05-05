@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Store, StoreComponent} from "react-stores";
 import {PagesStore} from "../../stores/pages";
 import {API} from "../../api";
-import {PagesActions} from "../../actions/PagesAction";
 
 export interface Props {
 	params?: any

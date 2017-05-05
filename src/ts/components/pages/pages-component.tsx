@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Store, StoreComponent} from "react-stores";
 import {PagesStore} from "../../stores/pages";
 import {API} from "../../api";
-import {PagesActions} from "../../actions/PagesAction";
 
 export interface Props {
 	params?: any
@@ -27,8 +26,7 @@ export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 		return (
 			<div>
 				PagesComponent
-				{this.stores.pages.state.page.content}
-				{this.props.children}
+				{this.stores.pages.state.currentPage.content}
 			</div>
 		);
 	}

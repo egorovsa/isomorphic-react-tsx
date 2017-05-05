@@ -1,60 +1,65 @@
 import * as React from 'react';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory, RouterState} from 'react-router';
 import {AppComponent} from "./components/laouts/app";
 import {MainPageComponent} from "./components/pages/main-page";
 import {Controllers} from "./controllers/controllers";
+import {PagesComponent} from "./components/pages/pages-component";
+import {TestComponent} from "./components/pages/test-component";
 
 let getComponent = (data, cb) => {
-	let controllers = new Controllers(data);
+	let controllers = data['controllers'];
 	let params: any = data['params'];
 
 	controllers.isPage(params.controller, params.action, () => {
-		cb(null, controllers[params.controller][params.action]().component);
+		controllers[params.controller][params.action]().then((data) => {
+			cb(null, data.component);
+		})
 	});
 };
 
-let getLayout = (data) => {
-	let controllers = new Controllers(data);
-	let params: any = data.params;
-
-	controllers.isPage(params.controller, params.action, () => {
-		if (controllers[params.controller][params.action]().layout) {
-			data.routes[0].component = controllers[params.controller][params.action]().layout
-		}
-	});
+let getLayout = (data: RouterState) => {
+	if (data['renderLayout']) {
+		data.routes[0].component = data['renderLayout'];
+	}
 };
 
 let routeMap: JSX.Element = (
-	<Route path="/" component={AppComponent}>
+	<Route path="/" component={AppComponent} onEnter={(data) => {
+		if (!data['controllers']) {
+			data['controllers'] = new Controllers(data);
+		}
+
+		let controllers = data['controllers'];
+
+		if (data.params['controller']) {
+			let action = data.params['action'] ? data.params['action'] : 'index';
+
+			controllers.isPage(data.params['controller'], action, () => {
+				let render = controllers[data.params['controller']][action]();
+
+				data['renderComponent'] = render.component;
+				data['renderLayout'] = render.layout;
+			});
+		}
+	}}>
 		<IndexRoute component={MainPageComponent}/>
 
 		<Route path=":controller">
 			<IndexRoute
-				onEnter={(data) => {
-					data['params']['action'] = 'index';
-
+				onEnter={(data: RouterState) => {
 					getLayout(data);
-				}}
-
-				getComponent={(data, cb) => {
-					data['params']['action'] = 'index';
-
-					getComponent(data, (err, component) => {
-						cb(err, component);
-					})
+					data.routes[1].component = data['renderComponent'];
 				}}
 			/>
 
 			<Route
 				path=":action"
-				onEnter={(data) => {
+				onEnter={(data: RouterState) => {
 					getLayout(data);
+					data.routes[2].component = data['renderComponent'];
 				}}
-				getComponent={(data, cb) => {
-					getComponent(data, (err, component) => {
-						cb(err, component);
-					})
-				}}>
+
+			>
 
 			</Route>
 		</Route>

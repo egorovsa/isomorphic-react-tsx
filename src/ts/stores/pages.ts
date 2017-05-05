@@ -12,11 +12,11 @@ export namespace PagesStore {
 	}
 
 	export interface State {
-		page: Page
+		currentPage: Page
 	}
 
 	let initialState: State = {
-		page: {
+		currentPage: {
 			id: 0,
 			title: '',
 			description: '',

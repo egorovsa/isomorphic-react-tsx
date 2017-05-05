@@ -25,4 +25,9 @@ export class UtilsService {
 
 		return str.substring(0, str.length - 1) + "}";
 	}
+
+	static isPromise(subject: Promise<any>) {
+		return typeof subject.then == 'function';
+	}
+
 }

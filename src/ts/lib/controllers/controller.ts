@@ -1,19 +1,40 @@
 import * as React from "react";
-import {AppComponent} from "../../components/laouts/app";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
+import {UtilsService} from "../../services/UtilsService";
 
 export class Controller {
 	constructor(data) {
 		this.data = data;
 	}
 
+	public component;
+	public layout;
+
 	public data;
 
-	public render(component: React.ComponentClass<any>, layout?: React.ComponentClass<any>) {
+	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any>>) {
+		let promise: Promise<any> = new Promise((resolve, reject) => {
+			resolve();
+		});
+
+		let layout: React.ComponentClass<any> = null;
+
+		args.map((arg) => {
+			if (UtilsService.isPromise(arg as Promise<any>)) {
+				promise = arg as Promise<any>;
+			} else {
+				layout = arg as React.ComponentClass<any>
+			}
+		});
+
+		this.component = component;
+		this.layout = layout;
+
 		return {
 			component: component,
-			layout: layout ? layout : null
+			layout: layout,
+			promise: promise
 		}
 	}
 
@@ -35,4 +56,6 @@ export class Controller {
 			metadata: newMetaData
 		} as CommonStore.State);
 	}
+
+
 }
