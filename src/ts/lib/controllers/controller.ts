@@ -3,38 +3,45 @@ import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
 import {UtilsService} from "../../services/UtilsService";
 
+export interface ControllerRender {
+	component: React.ComponentClass<any>,
+	layout: React.ComponentClass<any>,
+	promises: Promise<any>
+}
+
+export interface BeforeFilter {
+	promises: Promise<any>
+}
+
 export class Controller {
 	constructor(data) {
 		this.data = data;
 	}
 
-	public component;
-	public layout;
-
 	public data;
 
-	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any>>) {
-		let promise: Promise<any> = new Promise((resolve, reject) => {
-			resolve();
-		});
-
+	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any>>): ControllerRender {
+		let promises: Promise<any>[] = [];
 		let layout: React.ComponentClass<any> = null;
 
 		args.map((arg) => {
 			if (UtilsService.isPromise(arg as Promise<any>)) {
-				promise = arg as Promise<any>;
+				promises.push(arg as Promise<any>);
 			} else {
 				layout = arg as React.ComponentClass<any>
 			}
 		});
 
-		this.component = component;
-		this.layout = layout;
-
 		return {
 			component: component,
 			layout: layout,
-			promise: promise
+			promises: Promise.all(promises)
+		}
+	}
+
+	public beforeFilter(): BeforeFilter {
+		return {
+			promises: Promise.all([])
 		}
 	}
 

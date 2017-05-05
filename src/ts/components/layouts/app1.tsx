@@ -2,6 +2,7 @@ import * as React from 'react';
 import {HeaderComponent} from "../ui/header";
 import {FooterComponent} from "../ui/footer";
 import {SideNavComponent} from "../ui/sidenav";
+import {Header1Component} from "../ui/header1";
 
 export interface Props {
 
@@ -15,11 +16,10 @@ export class App1Component extends React.Component<Props, State> {
     render() {
         return (
             <div>
-				<h1>MainLayout123</h1>
                 {/*<SideNavComponent/>*/}
-                {/*<HeaderComponent/>*/}
+                <Header1Component/>
                 {this.props.children}
-                <FooterComponent/>
+                {/*<FooterComponent/>*/}
             </div>
         );
     }
