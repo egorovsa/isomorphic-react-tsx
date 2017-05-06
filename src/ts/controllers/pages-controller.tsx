@@ -1,3 +1,4 @@
+import * as React from "react";
 import {TestComponent} from "../components/pages/test-component";
 import {PagesComponent} from "../components/pages/pages-component";
 import {AppController} from "./app-controller";
@@ -10,11 +11,23 @@ export class PagesController extends AppController {
 		super(data);
 	}
 
-	public index() {
-		return this.render(TestComponent);
+	public index(a, b, c, d, e, r, f, g, h) {
+		console.log(a, b, c, d, e, r, f, g, h);
+		let helloworld = React.createClass({
+			render() {
+				return (
+					<div>Hello world</div>
+				);
+			}
+		});
+
+
+		return this.render(helloworld);
 	}
 
-	public page() {
+	public page(a, b, c, d, e, r, f, g, h) {
+		console.log(a, b, c, d, e, r, f, g, h);
+
 		return this.render(PagesComponent, {
 			data: this.getPagesData,
 			layout: App1Component

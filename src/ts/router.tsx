@@ -1,80 +1,91 @@
 import * as React from 'react';
 import {Router, Route, IndexRoute, browserHistory, RouterState} from 'react-router';
-import {AppComponent} from "./components/layouts/app";
-import {MainPageComponent} from "./components/pages/main-page";
-import {Controllers} from "./controllers/controllers";
-import {RenderOptions, ControllerRender} from "./lib/controllers/controller";
+import {AppControllers} from "./controllers/controllers";
+import {ControllerRender} from "./lib/controllers/controller";
+import {CONFIG} from "./config";
+import objectAssign = require("object-assign");
 
-let getLayout = (data: RouterState) => {
+export class AppRouter {
 
-};
+	static mainRoute(): JSX.Element {
+		let paramsPath: string = this.makeParamsPath();
 
-let routeMap: JSX.Element = (
-	<Route path="/" component={AppComponent}>
-		<IndexRoute component={MainPageComponent}/>
+		return (
+			<Route path={paramsPath}>
+				<IndexRoute
+					onEnter={(data: RouterState) => {
+						let controllers = new AppControllers(data);
 
-		<Route path=":controller">
-			<IndexRoute
-				onEnter={(data: RouterState) => {
-					let controllers = new Controllers(data);
-					let controller = data.params['controller'];
-					let action = 'index';
+						let parsedParams = AppRouter.parseParams(controllers, data);
 
-					controllers.isPage(controller, action, (err) => {
-						if (!err) {
-							let render: ControllerRender = controllers[data.params['controller']][action]();
+						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
 
-							data.routes[1].component = render.component;
+						data.routes[0].component = render.layout?render.layout:CONFIG.DEFAULT_LAYOUT_COMPONENT;
+						data.routes[1].component = render.component;
 
-							if (render.layout) {
-								data.routes[0].component = render.layout;
-							}
 
-							if (process && process.title === 'browser') {
-								render.promises();
-							}
+						if (process && process.title === 'browser') {
+							render.promises();
 						}
-					});
+					}}
+				/>
+			</Route>
+		);
+	}
 
-				}}
-			/>
+	static parseParams(controllers: AppControllers, data: RouterState) {
+		let params: Router.Params = objectAssign(data.params);
+		let controller = CONFIG.DEFAULT_CONTROLLER;
+		let action = CONFIG.DEFAULT_ACTION;
 
-			<Route
-				path=":action"
-				onEnter={(data: RouterState) => {
-					let controllers = new Controllers(data);
-					let controller = data.params['controller'];
-					let action = data.params['action'];
+		if (controllers.isController(params['param0'])) {
+			controller = params['param0'];
 
-					controllers.isPage(controller, action, (err) => {
-						if (!err) {
-							let render: ControllerRender = controllers[data.params['controller']][action]();
+			if (controllers.isAction(params['param0'], params['param1'])) {
+				action = params['param1'];
 
-							data.routes[2].component = render.component;
+				delete params['param1'];
+			}
+			delete params['param0'];
+		} else {
 
-							if (render.layout) {
-								data.routes[0].component = render.layout;
-							}
+		}
 
-							if (process && process.title === 'browser') {
-								render.promises();
-							}
-						}
-					});
-				}}
+		return {
+			controller: controller,
+			action: action,
+			params: this.paramsToArray(params)
+		}
+	}
 
-					>
+	static paramsToArray(params: Router.Params): string[] {
+		let paramsArray: string[] = [];
 
-					</Route>
-					</Route>
-					</Route>
-					);
+		for (let key in params) {
+			paramsArray.push(params[key])
+		}
 
-					export default routeMap;
+		return paramsArray;
+	}
 
-					export let ROUTER = (
-					<Router history={browserHistory}>
-					{routeMap}
-					</Router>
-					);
+	static makeParamsPath(): string {
+		let params: string = '';
+
+		for (let i = 0; i < 20; i++) {
+			if (i === 0) {
+				params += `(:param${i})`;
+			} else {
+				params += `(/:param${i})`;
+			}
+		}
+
+		return params;
+	}
+}
+
+export let ROUTER = (
+	<Router history={browserHistory}>
+		{AppRouter.mainRoute()}
+	</Router>
+);
 

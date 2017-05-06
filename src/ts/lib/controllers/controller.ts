@@ -18,9 +18,19 @@ export interface RenderOptions {
 export class Controller {
 	constructor(data) {
 		this.data = data;
+		this.location = data.location;
+		this.query = data.location.query;
+		this.hash = data.location.hash;
+		this.search = data.location.search;
+		this.pathname = data.location.pathname;
 	}
 
 	public data;
+	public location;
+	public query;
+	public hash;
+	public search;
+	public pathname;
 
 	public render(component: React.ComponentClass<any>, options?: RenderOptions): ControllerRender {
 		let promises: () => Promise<any> = () => {

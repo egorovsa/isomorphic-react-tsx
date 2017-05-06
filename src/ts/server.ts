@@ -5,8 +5,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
-import routes from './router';
-import {Controllers} from "./controllers/controllers";
+import {AppControllers} from "./controllers/controllers";
+import {AppRouter} from "./router";
 
 const app = express();
 
@@ -25,6 +25,8 @@ let metadata: MetaData = {
 app.use(express.static(path.join(__dirname, './../') + '/webroot'));
 
 app.use((req, res) => {
+	let routes = AppRouter.mainRoute();
+
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
 		metadata.title = "test";
 
@@ -34,21 +36,16 @@ app.use((req, res) => {
 			}
 
 			if (nextState) {
-				let controllers = new Controllers(nextState);
+				let controllers = new AppControllers(nextState);
+				let parsedParams = AppRouter.parseParams(controllers, nextState);
 
-				controllers.isPage(nextState.params['controller'], nextState.params['action'], (err) => {
-					if (!err) {
-						controllers[nextState.params['controller']][nextState.params['action']]().promises().then(() => {
-							return res.end(getServerHtml(nextState));
-						});
-					} else {
-						return res.status(404).send('Not found');
-					}
+				controllers[parsedParams.controller][parsedParams.action](...parsedParams.params).promises().then(() => {
+					return res.end(getServerHtml(nextState));
 				});
+
 			} else {
 				return res.status(404).send('Not found');
 			}
-
 		} else {
 			return res.status(500).send(error.message);
 		}
