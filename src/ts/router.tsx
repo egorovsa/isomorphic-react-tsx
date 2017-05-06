@@ -10,8 +10,7 @@ let getLayout = (data: RouterState) => {
 };
 
 let routeMap: JSX.Element = (
-	<Route path="/" component={AppComponent} onEnter={(data) => {
-	}}>
+	<Route path="/" component={AppComponent}>
 		<IndexRoute component={MainPageComponent}/>
 
 		<Route path=":controller">

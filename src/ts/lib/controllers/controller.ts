@@ -1,8 +1,6 @@
 import * as React from "react";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
-import {UtilsService} from "../../services/UtilsService";
-import {ComponentClass} from "react";
 import {AppComponent} from "../../components/layouts/app";
 
 export interface ControllerRender {
@@ -15,9 +13,6 @@ export interface ControllerRender {
 export interface RenderOptions {
 	data?: () => Promise<any>,
 	layout?: React.ComponentClass<any>
-}
-export interface BeforeFilter {
-	promises: Promise<any>
 }
 
 export class Controller {
