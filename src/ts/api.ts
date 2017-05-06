@@ -49,7 +49,7 @@ export class API {
 				});
 
 				resolve(exit);
-			}, 3000);
+			}, 5000);
 
 
 		});

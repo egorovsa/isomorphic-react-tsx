@@ -11,8 +11,7 @@ export class PagesController extends AppController {
 		super(data);
 	}
 
-	public index(a, b, c, d, e, r, f, g, h) {
-		console.log(a, b, c, d, e, r, f, g, h);
+	public index() {
 		let helloworld = React.createClass({
 			render() {
 				return (
@@ -25,8 +24,9 @@ export class PagesController extends AppController {
 		return this.render(helloworld);
 	}
 
-	public page(a, b, c, d, e, r, f, g, h) {
-		console.log(a, b, c, d, e, r, f, g, h);
+	public page() {
+
+		console.log('page exist');
 
 		return this.render(PagesComponent, {
 			data: this.getPagesData,
@@ -36,6 +36,7 @@ export class PagesController extends AppController {
 
 	private getPagesData = (): Promise<any> => {
 		return new Promise((resolve, reject) => {
+
 			API.getPageData(this.data.params['action']).then((data: PagesStore.Page) => {
 				PagesStore.store.setState({
 					currentPage: data

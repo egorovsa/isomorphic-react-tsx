@@ -34,7 +34,7 @@ export class AppRouter {
 	}
 
 	static parseParams(controllers: AppControllers, data: RouterState) {
-		let params: Router.Params = objectAssign(data.params);
+		let params: Router.Params = objectAssign({}, data.params);
 		let controller = CONFIG.DEFAULT_CONTROLLER;
 		let action = CONFIG.DEFAULT_ACTION;
 

@@ -50,24 +50,24 @@ export class Controller {
 		}
 	}
 
-	private metaData(metaData: MetaData): void {
-		let newMetaData: MetaData = {...CommonStore.store.state.metadata};
-		if (metaData.title) {
-			newMetaData.title = metaData.title
-		}
-
-		if (metaData.description) {
-			newMetaData.description = metaData.description
-		}
-
-		if (metaData.keywords) {
-			newMetaData.keywords = metaData.keywords
-		}
-
-		CommonStore.store.setState({
-			metadata: newMetaData
-		} as CommonStore.State);
-	}
+	// private metaData(metaData: MetaData): void {
+	// 	let newMetaData: MetaData = {...CommonStore.store.state.metadata};
+	// 	if (metaData.title) {
+	// 		newMetaData.title = metaData.title
+	// 	}
+	//
+	// 	if (metaData.description) {
+	// 		newMetaData.description = metaData.description
+	// 	}
+	//
+	// 	if (metaData.keywords) {
+	// 		newMetaData.keywords = metaData.keywords
+	// 	}
+	//
+	// 	CommonStore.store.setState({
+	// 		metadata: newMetaData
+	// 	} as CommonStore.State);
+	// }
 
 
 }

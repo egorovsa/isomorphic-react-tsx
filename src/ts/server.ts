@@ -28,9 +28,13 @@ app.use((req, res) => {
 	let routes = AppRouter.mainRoute();
 
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
-		metadata.title = "test";
+		metadata.title = "test1";
 
 		if (!error) {
+			if (nextState.params['param0'] && isControllerWebroot(nextState.params['param0'])) {
+				return res.status(500).send();
+			}
+
 			if (nextLocation) {
 				return res.status(301).send(nextLocation.pathname + nextLocation.search);
 			}
@@ -38,6 +42,8 @@ app.use((req, res) => {
 			if (nextState) {
 				let controllers = new AppControllers(nextState);
 				let parsedParams = AppRouter.parseParams(controllers, nextState);
+
+				console.log(isControllerWebroot(parsedParams.controller));
 
 				controllers[parsedParams.controller][parsedParams.action](...parsedParams.params).promises().then(() => {
 					return res.end(getServerHtml(nextState));
@@ -65,6 +71,12 @@ function getServerHtml(nextState: any): string {
 			keywords: metadata.keywords
 		}
 	);
+}
+
+function isControllerWebroot(controller: string) {
+	let dir = fs.readdirSync(path.resolve(__dirname, './../webroot'));
+
+	return dir.indexOf(controller) >= 0;
 }
 
 const PORT = process.env.PORT || 4001;

@@ -141,6 +141,12 @@ function clean() {
     ]);
 }
 
+function cleanServer() {
+    return del([
+        'dist/server'
+    ]);
+}
+
 function webroot() {
     return gulp.src([
         './src/webroot/*',
@@ -254,6 +260,7 @@ gulp.task('default', ['webroot'], function () {
     gulp.watch([
         'src/ts/server.ts',
     ], function () {
+        cleanServer();
         typeScriptCompile();
 
         console.log('Server build'.blue);
