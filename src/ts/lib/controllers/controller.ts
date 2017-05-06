@@ -3,6 +3,7 @@ import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
 import {UtilsService} from "../../services/UtilsService";
 import {ComponentClass} from "react";
+import {AppComponent} from "../../components/layouts/app";
 
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
@@ -39,14 +40,8 @@ export class Controller {
 
 		return {
 			component: component,
-			layout: options && options.layout ? options.layout : null,
+			layout: options && options.layout ? options.layout : AppComponent,
 			promises: promises
-		}
-	}
-
-	public beforeFilter(): BeforeFilter {
-		return {
-			promises: Promise.all([])
 		}
 	}
 

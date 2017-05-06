@@ -15,7 +15,6 @@ export class PagesController extends AppController {
 	}
 
 	public page() {
-
 		return this.render(PagesComponent, {
 			data: this.getPagesData,
 			layout: App1Component

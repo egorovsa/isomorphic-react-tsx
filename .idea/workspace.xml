@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a610bcb-9398-483f-97e3-eb7e3254be9b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/controllers/controllers.ts" afterPath="$PROJECT_DIR$/src/ts/controllers/controllers.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/controllers/pages-controller.ts" afterPath="$PROJECT_DIR$/src/ts/controllers/pages-controller.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" afterPath="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/router.tsx" afterPath="$PROJECT_DIR$/src/ts/router.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/server.ts" afterPath="$PROJECT_DIR$/src/ts/server.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="router.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+            <state relative-caret-position="563">
+              <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -41,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/src/ts/server.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="371">
-              <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
+              <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -49,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controller.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="33" />
+            <state relative-caret-position="616">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#121#178#0" expanded="true" />
@@ -62,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pages-controller.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pages-controller.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/controllers/pages-controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="35" />
+            <state relative-caret-position="310">
+              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -119,9 +118,11 @@
       <file leaf-file-name="controllers.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/controllers/controllers.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="0">
+              <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,16 +228,16 @@
         <option value="$PROJECT_DIR$/src/ts/actions/PagesAction.ts" />
         <option value="$PROJECT_DIR$/src/ts/components/pages/pages-component.tsx" />
         <option value="$PROJECT_DIR$/src/ts/components/pages/test-component.tsx" />
-        <option value="$PROJECT_DIR$/src/ts/controllers/controllers.ts" />
         <option value="$PROJECT_DIR$/src/ts/services/UtilsService.ts" />
         <option value="$PROJECT_DIR$/src/ts/controllers/app-controller.ts" />
         <option value="$PROJECT_DIR$/src/ts/components/layouts/app1.tsx" />
         <option value="$PROJECT_DIR$/src/styl/main-page.styl" />
         <option value="$PROJECT_DIR$/src/ts/components/ui/header1.tsx" />
         <option value="$PROJECT_DIR$/src/ts/server.ts" />
-        <option value="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
         <option value="$PROJECT_DIR$/src/ts/router.tsx" />
+        <option value="$PROJECT_DIR$/src/ts/controllers/controllers.ts" />
         <option value="$PROJECT_DIR$/src/ts/controllers/pages-controller.ts" />
+        <option value="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
       </list>
     </option>
   </component>
@@ -656,12 +657,12 @@
       <workItem from="1493799874486" duration="40241000" />
       <workItem from="1493973931370" duration="2821000" />
       <workItem from="1493989324305" duration="9290000" />
-      <workItem from="1494065623183" duration="2277000" />
+      <workItem from="1494065623183" duration="3834000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232683000" />
+    <option name="totallyTimeSpent" value="234240000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -683,9 +684,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.49547064" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41084695" sideWeight="0.30090588" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33506685" sideWeight="0.30090588" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24931075" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41084695" sideWeight="0.6990941" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33506685" sideWeight="0.6990941" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15714848" sideWeight="0.2519774" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39895988" sideWeight="0.49625838" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -858,6 +859,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +965,7 @@
         <state relative-caret-position="156">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1032,49 +1034,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/controllers/controllers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <element signature="e#121#178#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="47" column="43" lean-forward="true" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/server.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
-          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
+          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/controllers/controllers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/controllers/pages-controller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="35" />
+        <state relative-caret-position="310">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#121#178#0" expanded="true" />
           </folding>
         </state>
       </provider>

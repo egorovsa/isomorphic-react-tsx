@@ -13,7 +13,7 @@ export class Controllers {
 	public pages;
 	public test;
 
-	public isPage(controller: string, action: string, callback: (err: boolean) => void) {
+	public isPage(controller: string, action: string, callback: (err: boolean) => void): void {
 		if (this[controller]) {
 			if (this[controller][action]) {
 				callback(null)
