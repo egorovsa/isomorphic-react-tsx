@@ -2,13 +2,19 @@ import * as React from "react";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
 import {UtilsService} from "../../services/UtilsService";
+import {ComponentClass} from "react";
 
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
 	layout: React.ComponentClass<any>,
-	promises: Promise<any>
+	promises: () => Promise<any>
 }
 
+
+export interface RenderOptions {
+	data?: () => Promise<any>,
+	layout?: React.ComponentClass<any>
+}
 export interface BeforeFilter {
 	promises: Promise<any>
 }
@@ -20,22 +26,21 @@ export class Controller {
 
 	public data;
 
-	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any>>): ControllerRender {
-		let promises: Promise<any>[] = [];
-		let layout: React.ComponentClass<any> = null;
+	public render(component: React.ComponentClass<any>, options?: RenderOptions): ControllerRender {
+		let promises: () => Promise<any> = () => {
+			return new Promise((resolve) => {
+				resolve();
+			})
+		};
 
-		args.map((arg) => {
-			if (UtilsService.isPromise(arg as Promise<any>)) {
-				promises.push(arg as Promise<any>);
-			} else {
-				layout = arg as React.ComponentClass<any>
-			}
-		});
+		if (options && options.data) {
+			promises = options.data;
+		}
 
 		return {
 			component: component,
-			layout: layout,
-			promises: Promise.all(promises)
+			layout: options && options.layout ? options.layout : null,
+			promises: promises
 		}
 	}
 

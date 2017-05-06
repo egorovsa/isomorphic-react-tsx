@@ -38,10 +38,8 @@ app.use((req, res) => {
 
 				controllers.isPage(nextState.params['controller'], nextState.params['action'], (err) => {
 					if (!err) {
-						controllers[nextState.params['controller']].beforeFilter().promises.then(() => {
-							controllers[nextState.params['controller']][nextState.params['action']]().promises.then(() => {
-								return res.end(getServerHtml(nextState));
-							});
+						controllers[nextState.params['controller']][nextState.params['action']]().promises().then(() => {
+							return res.end(getServerHtml(nextState));
 						});
 					} else {
 						return res.status(404).send('Not found');

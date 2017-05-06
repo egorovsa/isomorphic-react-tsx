@@ -15,9 +15,15 @@ export class PagesController extends AppController {
 	}
 
 	public page() {
-		
-		console.log('page');
-		let loadData = new Promise((resolve, reject) => {
+
+		return this.render(PagesComponent, {
+			data: this.getPagesData,
+			layout: App1Component
+		});
+	}
+
+	private getPagesData = (): Promise<any> => {
+		return new Promise((resolve, reject) => {
 			API.getPageData(this.data.params['action']).then((data: PagesStore.Page) => {
 				PagesStore.store.setState({
 					currentPage: data
@@ -26,9 +32,7 @@ export class PagesController extends AppController {
 				resolve();
 			});
 		});
-
-		return this.render(PagesComponent, App1Component, loadData);
-	}
+	};
 
 	public page1() {
 		return this.render(TestComponent);
