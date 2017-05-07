@@ -43,7 +43,13 @@ app.use((req, res) => {
 				let controllers = new AppControllers(nextState);
 				let parsedParams = AppRouter.parseParams(controllers, nextState);
 
-				console.log(isControllerWebroot(parsedParams.controller));
+				if (
+					nextState.params['param0'] &&
+					parsedParams.defaultController &&
+					controllers[parsedParams.controller][parsedParams.action].length === 0
+				) {
+					return res.status(404).send('Not found');
+				}
 
 				controllers[parsedParams.controller][parsedParams.action](...parsedParams.params).promises().then(() => {
 					return res.end(getServerHtml(nextState));

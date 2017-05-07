@@ -280,6 +280,8 @@ gulp.task('default', ['webroot'], function () {
         './src/ts/**/*.tsx',
         '!./src/ts/server.ts'
     ], function () {
+        cleanServer();
+        typeScriptCompile();
         bundle();
     });
 

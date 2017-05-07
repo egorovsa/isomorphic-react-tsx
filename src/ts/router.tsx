@@ -37,6 +37,8 @@ export class AppRouter {
 		let params: Router.Params = objectAssign({}, data.params);
 		let controller = CONFIG.DEFAULT_CONTROLLER;
 		let action = CONFIG.DEFAULT_ACTION;
+		let defaultController: boolean = false;
+		let defaultAction: boolean = false;
 
 		if (controllers.isController(params['param0'])) {
 			controller = params['param0'];
@@ -45,16 +47,21 @@ export class AppRouter {
 				action = params['param1'];
 
 				delete params['param1'];
+			} else {
+				defaultAction = true;
 			}
+
 			delete params['param0'];
 		} else {
-
+			defaultController = true;
 		}
 
 		return {
 			controller: controller,
 			action: action,
-			params: this.paramsToArray(params)
+			params: this.paramsToArray(params),
+			defaultController: defaultController,
+			defaultAction: defaultAction
 		}
 	}
 
