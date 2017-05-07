@@ -25,6 +25,8 @@ let metadata: MetaData = {
 app.use(express.static(path.join(__dirname, './../') + '/webroot'));
 
 app.use((req, res) => {
+
+	console.log('res');
 	let routes = AppRouter.mainRoute();
 
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
@@ -51,10 +53,7 @@ app.use((req, res) => {
 					return res.status(404).send('Not found');
 				}
 
-				controllers[parsedParams.controller][parsedParams.action](...parsedParams.params).promises().then(() => {
-					return res.end(getServerHtml(nextState));
-				});
-
+				return res.end(getServerHtml(nextState));
 			} else {
 				return res.status(404).send('Not found');
 			}

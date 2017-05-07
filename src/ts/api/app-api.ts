@@ -1,6 +1,6 @@
 import {PagesApi} from "./pages-api";
 
-class Api {
+class ApiClass {
 	constructor() {
 		this.pages = new PagesApi;
 	}
@@ -8,4 +8,4 @@ class Api {
 	public pages: PagesApi;
 }
 
-export let AppApi = new Api();
+export let AppApi = new ApiClass();

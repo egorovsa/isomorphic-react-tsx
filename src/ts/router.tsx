@@ -13,7 +13,7 @@ export class AppRouter {
 		return (
 			<Route path={paramsPath}>
 				<IndexRoute
-					onEnter={(data: RouterState) => {
+					onEnter={(data: RouterState, replace, cb ) => {
 						let controllers = new AppControllers(data);
 
 						let parsedParams = AppRouter.parseParams(controllers, data);
@@ -23,10 +23,9 @@ export class AppRouter {
 						data.routes[0].component = render.layout?render.layout:CONFIG.DEFAULT_LAYOUT_COMPONENT;
 						data.routes[1].component = render.component;
 
-
-						if (process && process.title === 'browser') {
-							render.promises();
-						}
+						render.promises().then(()=>{
+							cb();
+						});
 					}}
 				/>
 			</Route>
