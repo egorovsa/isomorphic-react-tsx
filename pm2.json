@@ -1,6 +1,6 @@
 {
   "apps" : [{
-    "name"        : "Isomorphic react",
+    "name"        : "Isomorphic react1 ",
     "script"      : "./dist/server/server.js",
     "watch"       : true
   }]

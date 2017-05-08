@@ -7,6 +7,7 @@ import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
 import {AppControllers} from "./controllers/controllers";
 import {AppRouter} from "./router";
+import {UtilsService} from "./services/UtilsService";
 
 const app = express();
 
@@ -80,7 +81,8 @@ function getServerHtml(nextState: any): string {
 			componentHtml: componentHTML,
 			title: metadata.title,
 			description: metadata.description,
-			keywords: metadata.keywords
+			keywords: metadata.keywords,
+			initialState: UtilsService.objToString(global['_INITIAL_STATE_'] ? JSON.stringify(global['_INITIAL_STATE_']) : JSON.stringify({}))
 		}
 	);
 }

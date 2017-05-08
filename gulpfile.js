@@ -189,6 +189,7 @@ function baseHtml() {
         title: '{{{title}}}',
         keywords: '{{{keywords}}}',
         description: '{{{description}}}',
+        initialState: '{{{initialState}}}',
     };
 
     let options = {};

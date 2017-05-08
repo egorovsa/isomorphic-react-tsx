@@ -25,31 +25,13 @@ export class PagesController extends AppController {
 			}
 		});
 
-		console.log('index');
-
-		// fetch('http://metallapriem.ru/api/get_page/opt')
-		// 	.then(function (response) {
-		// 		if (response.status >= 400) {
-		// 			throw new Error("Bad response from server");
-		// 		}
-		//
-		// 		return response.json();
-		// 	})
-		// 	.then(function (stories) {
-		// 		console.log('TEST2',stories);
-		//
-		// 	});
-
 		return this.render(helloworld, {
 			data: () => {
 				return new Promise((resolve) => {
-					// AppApi.pages.getPageData(slug).then(() => {
-
-					setTimeout(() => {
+					AppApi.pages.getPageData(slug).then((data) => {
+						console.log(data);
 						resolve();
-					}, 3000);
-
-					// });
+					});
 				})
 			}
 		});

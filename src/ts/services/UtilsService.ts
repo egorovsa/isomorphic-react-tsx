@@ -1,5 +1,10 @@
 export class UtilsService {
-	static objToString(obj) {
+	static objToString(obj):string {
+
+		if(JSON.stringify(obj)==='{}'){
+			return '{}';
+		}
+
 		let str = '{';
 		if (typeof obj == 'object') {
 
