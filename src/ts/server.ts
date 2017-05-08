@@ -24,15 +24,19 @@ let metadata: MetaData = {
 
 app.use(express.static(path.join(__dirname, './../') + '/webroot'));
 
-app.use((req, res) => {
-	console.log('here');
+app.use((req, res, next) => {
+	if (req.path.indexOf('.') >= 0) {
+		return res.status(500).send();
+	}
 
+	next();
+});
+
+app.use((req, res) => {
 	let routing = new AppRouter();
 	let routes = routing.mainRoute(true);
 
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
-		console.log('123');
-
 		metadata.title = "test1";
 
 		if (!error) {
@@ -56,21 +60,6 @@ app.use((req, res) => {
 					return res.status(404).send('Not found');
 				}
 
-
-				// console.log(nextState.routes[1].onEnter.toString());
-
-				nextState.routes[1].onEnter = () => {
-				};
-
-				nextState.routes[0].indexRoute.onEnter = () => {
-				};
-
-				nextState.router['routes'][1]['onEnter'] = () => {
-
-				};
-
-			
-				console.log(nextState);
 				return res.end(getServerHtml(nextState));
 			} else {
 				return res.status(404).send('Not found');
@@ -99,7 +88,7 @@ function getServerHtml(nextState: any): string {
 function isControllerWebroot(controller: string) {
 	let dir = fs.readdirSync(path.resolve(__dirname, './../webroot'));
 
-	return dir.indexOf(controller) >= 0 || controller.indexOf('.') >= 0;
+	return dir.indexOf(controller) >= 0;
 }
 
 const PORT = process.env.PORT || 4001;

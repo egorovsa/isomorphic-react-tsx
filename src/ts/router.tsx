@@ -8,49 +8,25 @@ import objectAssign = require("object-assign");
 export class AppRouter {
 
 	public mainRoute(server?: boolean): JSX.Element {
-		console.log('mainRoute', server);
 		let paramsPath: string = this.makeParamsPath();
-		let indexRoute: JSX.Element = null;
-
-		if (server) {
-			indexRoute = this.serverRoute();
-		} else {
-			indexRoute = this.clientRoute();
-		}
 
 		return (
 			<Route path={paramsPath}>
-				{indexRoute}
+				<IndexRoute
+					onEnter={(data: RouterState, replace, next) => {
+						let render: ControllerRender = this.setRenderComponent(data);
+
+						if (server) {
+							render.promises().then(() => {
+								next();
+							});
+						} else {
+							next();
+							render.promises();
+						}
+					}}
+				/>
 			</Route>
-		);
-	}
-
-	public clientRoute(): JSX.Element {
-		// console.log('clientRoute');
-
-		return (
-			<IndexRoute
-				onEnter={(data: RouterState) => {
-						let render: ControllerRender = this.setRenderComponent(data);
-
-						render.promises();
-					}}
-			/>
-		)
-	}
-
-	public serverRoute(): JSX.Element {
-		// console.log('serverRoute');
-		return (
-			<IndexRoute
-				onEnter={(data: RouterState, replace, cb ) => {
-						let render: ControllerRender = this.setRenderComponent(data);
-
-						render.promises().then(()=>{
-							cb();
-						});
-					}}
-			/>
 		);
 	}
 

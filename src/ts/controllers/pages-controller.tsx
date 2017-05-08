@@ -47,7 +47,7 @@ export class PagesController extends AppController {
 
 					setTimeout(() => {
 						resolve();
-					}, 7000);
+					}, 3000);
 
 					// });
 				})
@@ -56,10 +56,6 @@ export class PagesController extends AppController {
 	}
 
 	public page() {
-
-		console.log('page exist');
-
-
 		return this.render(PagesComponent, {
 			layout: App1Component
 		});
