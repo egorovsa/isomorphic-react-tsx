@@ -50,6 +50,10 @@ export class Controller {
 		}
 	}
 
+	public beforeFilter() {
+		
+	}
+
 	// private metaData(metaData: MetaData): void {
 	// 	let newMetaData: MetaData = {...CommonStore.store.state.metadata};
 	// 	if (metaData.title) {

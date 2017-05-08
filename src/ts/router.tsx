@@ -14,7 +14,12 @@ export class AppRouter {
 			<Route path={paramsPath}>
 				<IndexRoute
 					onEnter={(data: RouterState, replace, next) => {
-						let render: ControllerRender = this.setRenderComponent(data);
+						let controllers = new AppControllers(data);
+						let parsedParams = this.parseParams(controllers, data);
+						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
+
+						data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;
+						data.routes[1].component = render.component;
 
 						if (server) {
 							render.promises().then(() => {
@@ -28,17 +33,6 @@ export class AppRouter {
 				/>
 			</Route>
 		);
-	}
-
-	public setRenderComponent(data: RouterState): ControllerRender {
-		let controllers = new AppControllers(data);
-		let parsedParams = this.parseParams(controllers, data);
-		let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
-
-		data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;
-		data.routes[1].component = render.component;
-
-		return render;
 	}
 
 	public parseParams(controllers: AppControllers, data: RouterState) {

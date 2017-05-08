@@ -20,7 +20,7 @@ export class AppComponent extends React.Component<Props, State> {
 				<Header1Component/>
 				{/*<HeaderComponent/>*/}
                 {this.props.children}
-                <FooterComponent/>
+                {/*<FooterComponent/>*/}
             </div>
         );
     }
