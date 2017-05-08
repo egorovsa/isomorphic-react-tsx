@@ -82,7 +82,7 @@ function getServerHtml(nextState: any): string {
 			title: metadata.title,
 			description: metadata.description,
 			keywords: metadata.keywords,
-			initialState: UtilsService.objToString(global['_INITIAL_STATE_'] ? JSON.stringify(global['_INITIAL_STATE_']) : JSON.stringify({}))
+			initialState: global['_INITIAL_STATE_'] ? JSON.stringify(global['_INITIAL_STATE_']) : JSON.stringify({})
 		}
 	);
 }
