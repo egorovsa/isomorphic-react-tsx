@@ -25,11 +25,14 @@ let metadata: MetaData = {
 app.use(express.static(path.join(__dirname, './../') + '/webroot'));
 
 app.use((req, res) => {
+	console.log('here');
 
-	console.log('res');
-	let routes = AppRouter.mainRoute();
+	let routing = new AppRouter();
+	let routes = routing.mainRoute(true);
 
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
+		console.log('123');
+
 		metadata.title = "test1";
 
 		if (!error) {
@@ -43,7 +46,7 @@ app.use((req, res) => {
 
 			if (nextState) {
 				let controllers = new AppControllers(nextState);
-				let parsedParams = AppRouter.parseParams(controllers, nextState);
+				let parsedParams = routing.parseParams(controllers, nextState);
 
 				if (
 					nextState.params['param0'] &&
@@ -53,6 +56,21 @@ app.use((req, res) => {
 					return res.status(404).send('Not found');
 				}
 
+
+				// console.log(nextState.routes[1].onEnter.toString());
+
+				nextState.routes[1].onEnter = () => {
+				};
+
+				nextState.routes[0].indexRoute.onEnter = () => {
+				};
+
+				nextState.router['routes'][1]['onEnter'] = () => {
+
+				};
+
+			
+				console.log(nextState);
 				return res.end(getServerHtml(nextState));
 			} else {
 				return res.status(404).send('Not found');
@@ -81,7 +99,7 @@ function getServerHtml(nextState: any): string {
 function isControllerWebroot(controller: string) {
 	let dir = fs.readdirSync(path.resolve(__dirname, './../webroot'));
 
-	return dir.indexOf(controller) >= 0;
+	return dir.indexOf(controller) >= 0 || controller.indexOf('.') >= 0;
 }
 
 const PORT = process.env.PORT || 4001;

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {ROUTER} from './router';
+import { AppRouter} from './router';
 
 window.onload = () => {
+	let routing = new AppRouter;
+
     ReactDOM.render(
-        ROUTER,
+		routing.router(),
         document.getElementById('app')
     );
 };

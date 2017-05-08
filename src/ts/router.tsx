@@ -7,32 +7,65 @@ import objectAssign = require("object-assign");
 
 export class AppRouter {
 
-	static mainRoute(): JSX.Element {
+	public mainRoute(server?: boolean): JSX.Element {
+		console.log('mainRoute', server);
 		let paramsPath: string = this.makeParamsPath();
+		let indexRoute: JSX.Element = null;
+
+		if (server) {
+			indexRoute = this.serverRoute();
+		} else {
+			indexRoute = this.clientRoute();
+		}
 
 		return (
 			<Route path={paramsPath}>
-				<IndexRoute
-					onEnter={(data: RouterState, replace, cb ) => {
-						let controllers = new AppControllers(data);
+				{indexRoute}
+			</Route>
+		);
+	}
 
-						let parsedParams = AppRouter.parseParams(controllers, data);
+	public clientRoute(): JSX.Element {
+		// console.log('clientRoute');
 
-						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
+		return (
+			<IndexRoute
+				onEnter={(data: RouterState) => {
+						let render: ControllerRender = this.setRenderComponent(data);
 
-						data.routes[0].component = render.layout?render.layout:CONFIG.DEFAULT_LAYOUT_COMPONENT;
-						data.routes[1].component = render.component;
+						render.promises();
+					}}
+			/>
+		)
+	}
+
+	public serverRoute(): JSX.Element {
+		// console.log('serverRoute');
+		return (
+			<IndexRoute
+				onEnter={(data: RouterState, replace, cb ) => {
+						let render: ControllerRender = this.setRenderComponent(data);
 
 						render.promises().then(()=>{
 							cb();
 						});
 					}}
-				/>
-			</Route>
+			/>
 		);
 	}
 
-	static parseParams(controllers: AppControllers, data: RouterState) {
+	public setRenderComponent(data: RouterState): ControllerRender {
+		let controllers = new AppControllers(data);
+		let parsedParams = this.parseParams(controllers, data);
+		let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
+
+		data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;
+		data.routes[1].component = render.component;
+
+		return render;
+	}
+
+	public parseParams(controllers: AppControllers, data: RouterState) {
 		let params: Router.Params = objectAssign({}, data.params);
 		let controller = CONFIG.DEFAULT_CONTROLLER;
 		let action = CONFIG.DEFAULT_ACTION;
@@ -64,7 +97,7 @@ export class AppRouter {
 		}
 	}
 
-	static paramsToArray(params: Router.Params): string[] {
+	public paramsToArray(params: Router.Params): string[] {
 		let paramsArray: string[] = [];
 
 		for (let key in params) {
@@ -74,7 +107,7 @@ export class AppRouter {
 		return paramsArray;
 	}
 
-	static makeParamsPath(): string {
+	public makeParamsPath(): string {
 		let params: string = '';
 
 		for (let i = 0; i < 20; i++) {
@@ -87,11 +120,14 @@ export class AppRouter {
 
 		return params;
 	}
+
+	public router() {
+		return (
+			<Router history={browserHistory}>
+				{this.mainRoute()}
+			</Router>
+		)
+	}
 }
 
-export let ROUTER = (
-	<Router history={browserHistory}>
-		{AppRouter.mainRoute()}
-	</Router>
-);
 
