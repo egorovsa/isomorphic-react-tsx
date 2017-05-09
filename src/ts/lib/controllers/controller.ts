@@ -2,16 +2,17 @@ import * as React from "react";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
 import {AppComponent} from "../../components/layouts/app";
+import {CONFIG} from "../../config";
 
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
 	layout: React.ComponentClass<any>,
-	promises: () => Promise<any>
+	promises: Promise<any>
 }
 
 
 export interface RenderOptions {
-	data?: () => Promise<any>,
+	promise?: Promise<any>,
 	layout?: React.ComponentClass<any>
 }
 
@@ -32,26 +33,32 @@ export class Controller {
 	public search;
 	public pathname;
 
-	public render(component: React.ComponentClass<any>, options?: RenderOptions): ControllerRender {
+	public render(component: React.ComponentClass<any>, promise?: Promise<any>, layout?: React.ComponentClass<any>): ControllerRender {
+		let promises: Promise<any> = new Promise((resolve) => {
+			resolve();
+		});
+
+		if (promise) {
+			promises = promise;
+		}
+
+		return {
+			component: component,
+			layout: layout ? layout : CONFIG.DEFAULT_LAYOUT_COMPONENT,
+			promises: promises
+		}
+	}
+
+	public filterData(promis: Promise<any>) {
 		let promises: () => Promise<any> = () => {
 			return new Promise((resolve) => {
 				resolve();
 			})
 		};
-
-		if (options && options.data) {
-			promises = options.data;
-		}
-
-		return {
-			component: component,
-			layout: options && options.layout ? options.layout : AppComponent,
-			promises: promises
-		}
 	}
 
 	public beforeFilter() {
-		
+
 	}
 
 	// private metaData(metaData: MetaData): void {

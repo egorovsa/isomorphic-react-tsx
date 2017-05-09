@@ -10,7 +10,6 @@ export class Api {
 				let existsData = this.getExistState(nameOfData);
 
 				if (existsData) {
-					console.log('existsData', existsData);
 					resolve(existsData);
 				} else {
 					this.fetch(url, nameOfData).then((data) => {
@@ -55,10 +54,13 @@ export class Api {
 	private getExistState(nameOfData: string): any {
 		if (typeof window !== 'undefined') {
 
-			window['_INITIAL_STATE_'] = window['_INITIAL_STATE_'] === '{{{initialState}}}' ? {} : window['_INITIAL_STATE_'];
-			console.log(window['_INITIAL_STATE_']);
+			console.log(JSON.stringify(window['_INITIAL_STATE_']) );
+			
+			window['_INITIAL_STATE_'] = JSON.stringify(window['_INITIAL_STATE_']) === '{{{initialState}}}' ? {} : window['_INITIAL_STATE_'];
 
 			let initialState = window['_INITIAL_STATE_'];
+
+			console.log(JSON.stringify(window['_INITIAL_STATE_']));
 
 			if (initialState[nameOfData]) {
 				return initialState[nameOfData];

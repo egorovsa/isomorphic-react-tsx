@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Router, Route, IndexRoute, browserHistory, RouterState} from 'react-router';
-import {AppControllers} from "./controllers/controllers";
+import {ControllersList} from "./controllers/controllers-list";
 import {ControllerRender} from "./lib/controllers/controller";
 import {CONFIG} from "./config";
 import objectAssign = require("object-assign");
@@ -14,7 +14,7 @@ export class AppRouter {
 			<Route path={paramsPath}>
 				<IndexRoute
 					onEnter={(data: RouterState, replace, next) => {
-						let controllers = new AppControllers(data);
+						let controllers = new ControllersList(data);
 						let parsedParams = this.parseParams(controllers, data);
 						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
 
@@ -22,12 +22,11 @@ export class AppRouter {
 						data.routes[1].component = render.component;
 
 						if (server) {
-							render.promises().then(() => {
+							render.promises.then(() => {
 								next();
 							});
 						} else {
 							next();
-							render.promises();
 						}
 					}}
 				/>
@@ -35,7 +34,7 @@ export class AppRouter {
 		);
 	}
 
-	public parseParams(controllers: AppControllers, data: RouterState) {
+	public parseParams(controllers: ControllersList, data: RouterState) {
 		let params: Router.Params = objectAssign({}, data.params);
 		let controller = CONFIG.DEFAULT_CONTROLLER;
 		let action = CONFIG.DEFAULT_ACTION;

@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
-import {AppControllers} from "./controllers/controllers";
+import {ControllersList} from "./controllers/controllers-list";
 import {AppRouter} from "./router";
 import * as serialize from "serialize-javascript";
 
@@ -50,13 +50,13 @@ app.use((req, res) => {
 			}
 
 			if (nextState) {
-				let controllers = new AppControllers(nextState);
-				let parsedParams = routing.parseParams(controllers, nextState);
+				let controllersList = new ControllersList(nextState);
+				let parsedParams = routing.parseParams(controllersList, nextState);
 
 				if (
 					nextState.params['param0'] &&
 					parsedParams.defaultController &&
-					controllers[parsedParams.controller][parsedParams.action].length === 0
+					controllersList[parsedParams.controller][parsedParams.action].length === 0
 				) {
 					return res.status(404).send('Not found');
 				}
@@ -75,6 +75,7 @@ function getServerHtml(nextState: any): string {
 	let indexFile = fs.readFileSync(path.join(__dirname, './../index.html'), "utf-8");
 	let template = handlebars.compile(indexFile);
 	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, nextState));
+
 	let initialState: string = serialize({}, {
 		isJSON: true
 	});

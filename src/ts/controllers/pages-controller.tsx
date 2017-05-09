@@ -17,41 +17,21 @@ export class PagesController extends AppController {
 	}
 
 	public index(slug) {
-		console.log('index');
+		let dataPromis: Promise<any> = AppApi.pages.getPageData(slug).then((data: any) => {
 
-		return this.render(PagesComponent, {
-			data: () => {
-				return new Promise((resolve) => {
-					AppApi.pages.getPageData(slug).then((data: any) => {
-						console.log( data.Page);
-						PagesStore.store.setState({
-							currentPage: data.Page
-						});
-						resolve();
-					});
-				})
-			}
+			PagesStore.store.setState({
+				currentPage: data.Page
+			});
+
+			return data;
 		});
+
+		return this.render(PagesComponent, dataPromis);
 	}
 
 	public page() {
-		return this.render(PagesComponent, {
-			layout: App1Component
-		});
+		return this.render(PagesComponent, null, App1Component);
 	}
-
-	private getPagesData = (): Promise<any> => {
-		return new Promise((resolve, reject) => {
-
-			// API.getPageData(this.data.params['action']).then((data: PagesStore.Page) => {
-			// 	PagesStore.store.setState({
-			// 		currentPage: data
-			// 	} as PagesStore.State);
-			//
-			// 	resolve();
-			// });
-		});
-	};
 
 	public page1() {
 		return this.render(TestComponent);
