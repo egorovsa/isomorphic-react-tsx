@@ -1,5 +1,6 @@
 // store.ts
 import {Store} from "react-stores";
+import {CONFIG} from "../config";
 
 export namespace CommonStore {
 
@@ -17,9 +18,9 @@ export namespace CommonStore {
 	// Store's state initial values
 	let initialState: State = {
 		metadata: {
-			title: '',
-			keywords: '',
-			description: ''
+			title: CONFIG.TITLE,
+			keywords: CONFIG.KEYWORDS,
+			description: CONFIG.DESCRIPTION
 		}
 	};
 

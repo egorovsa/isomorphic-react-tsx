@@ -8,20 +8,10 @@ import {match, RouterContext} from 'react-router';
 import {ControllersList} from "./controllers/controllers-list";
 import {AppRouter} from "./router";
 import * as serialize from "serialize-javascript";
+import {CONFIG} from "./config";
+import {CommonStore} from "./stores/common";
 
 const app = express();
-
-export interface MetaData {
-	title: string,
-	description: string
-	keywords: string,
-}
-
-let metadata: MetaData = {
-	title: 'React isomorphic app',
-	description: '',
-	keywords: ''
-};
 
 app.use(express.static(path.join(__dirname, './../') + '/webroot'));
 
@@ -38,8 +28,6 @@ app.use((req, res) => {
 	let routes = routing.mainRoute(true);
 
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
-		metadata.title = "test1";
-
 		if (!error) {
 			if (nextState.params['param0'] && isControllerWebroot(nextState.params['param0'])) {
 				return res.status(500).send();
@@ -89,9 +77,9 @@ function getServerHtml(nextState: any): string {
 	return template(
 		{
 			componentHtml: componentHTML,
-			title: metadata.title,
-			description: metadata.description,
-			keywords: metadata.keywords,
+			title: CommonStore.store.state.metadata.title,
+			description: CommonStore.store.state.metadata.description,
+			keywords: CommonStore.store.state.metadata.keywords,
 			initialState: initialState
 		}
 	);

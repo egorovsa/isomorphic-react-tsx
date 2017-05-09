@@ -5,6 +5,8 @@ const config = {
 	DEFAULT_ACTION: 'index',
 	DEFAULT_LAYOUT_COMPONENT: AppComponent,
 	TITLE: 'Isomorphic react ts',
+	KEYWORDS: 'KEYWORDS',
+	DESCRIPTION: 'DESCRIPTION',
 	API_URL: 'http://metallapriem.ru/api'
 };
 

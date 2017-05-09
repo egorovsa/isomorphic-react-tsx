@@ -1,8 +1,8 @@
 import * as React from "react";
 import {CommonStore} from "../../stores/common";
 import MetaData = CommonStore.MetaData;
-import {AppComponent} from "../../components/layouts/app";
 import {CONFIG} from "../../config";
+import objectAssign = require("object-assign");
 
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
@@ -33,18 +33,28 @@ export class Controller {
 	public search;
 	public pathname;
 
-	public render(component: React.ComponentClass<any>, promise?: Promise<any>, layout?: React.ComponentClass<any>): ControllerRender {
+	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any> | MetaData>): ControllerRender {
+
+		let layout: React.ComponentClass<any> = CONFIG.DEFAULT_LAYOUT_COMPONENT
+
+		args.map((arg: any) => {
+			if (this.isPromise(arg)) {
+				promises = arg;
+			} else if (arg.title || arg.description || arg.keywords) {
+				this.setMetaData(arg)
+			} else {
+				layout = arg;
+			}
+		});
+
+
 		let promises: Promise<any> = new Promise((resolve) => {
 			resolve();
 		});
 
-		if (promise) {
-			promises = promise;
-		}
-
 		return {
 			component: component,
-			layout: layout ? layout : CONFIG.DEFAULT_LAYOUT_COMPONENT,
+			layout: layout,
 			promises: promises
 		}
 	}
@@ -61,24 +71,33 @@ export class Controller {
 
 	}
 
-	// private metaData(metaData: MetaData): void {
-	// 	let newMetaData: MetaData = {...CommonStore.store.state.metadata};
-	// 	if (metaData.title) {
-	// 		newMetaData.title = metaData.title
-	// 	}
-	//
-	// 	if (metaData.description) {
-	// 		newMetaData.description = metaData.description
-	// 	}
-	//
-	// 	if (metaData.keywords) {
-	// 		newMetaData.keywords = metaData.keywords
-	// 	}
-	//
-	// 	CommonStore.store.setState({
-	// 		metadata: newMetaData
-	// 	} as CommonStore.State);
-	// }
+	private isPromise(func: any): boolean {
+		return typeof func.then === 'function';
+	}
+
+	private setMetaData(metaData: MetaData): void {
+		let newMetaData: MetaData = objectAssign({}, CommonStore.store.state.metadata);
+
+		if (metaData.title) {
+			newMetaData.title = metaData.title;
+
+			if (typeof document === 'object') {
+				document.title = metaData.title;
+			}
+		}
+
+		if (metaData.description) {
+			newMetaData.description = metaData.description
+		}
+
+		if (metaData.keywords) {
+			newMetaData.keywords = metaData.keywords
+		}
+
+		CommonStore.store.setState({
+			metadata: newMetaData
+		} as CommonStore.State);
+	}
 
 
 }

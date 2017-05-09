@@ -23,7 +23,11 @@ export class PagesController extends AppController {
 			return data;
 		});
 
-		return this.render(PagesComponent, dataPromise);
+		return this.render(PagesComponent, dataPromise, {
+			title: '12312',
+			description: 'description',
+			keywords: 'keywords'
+		});
 	}
 
 	public page() {
