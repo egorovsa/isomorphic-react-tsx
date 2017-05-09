@@ -7,7 +7,7 @@ import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
 import {AppControllers} from "./controllers/controllers";
 import {AppRouter} from "./router";
-import {UtilsService} from "./services/UtilsService";
+import * as serialize from "serialize-javascript";
 
 const app = express();
 
@@ -75,6 +75,15 @@ function getServerHtml(nextState: any): string {
 	let indexFile = fs.readFileSync(path.join(__dirname, './../index.html'), "utf-8");
 	let template = handlebars.compile(indexFile);
 	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, nextState));
+	let initialState: string = serialize({}, {
+		isJSON: true
+	});
+
+	if (global['_INITIAL_STATE_']) {
+		initialState = serialize(global['_INITIAL_STATE_'], {
+			isJSON: true
+		})
+	}
 
 	return template(
 		{
@@ -82,10 +91,11 @@ function getServerHtml(nextState: any): string {
 			title: metadata.title,
 			description: metadata.description,
 			keywords: metadata.keywords,
-			initialState: global['_INITIAL_STATE_'] ? JSON.stringify(global['_INITIAL_STATE_']) : JSON.stringify({})
+			initialState: initialState
 		}
 	);
 }
+
 
 function isControllerWebroot(controller: string) {
 	let dir = fs.readdirSync(path.resolve(__dirname, './../webroot'));

@@ -17,19 +17,16 @@ export class PagesController extends AppController {
 	}
 
 	public index(slug) {
-		let helloworld = React.createClass({
-			render() {
-				return (
-					<div>Hello world {slug} 12356</div>
-				);
-			}
-		});
+		console.log('index');
 
-		return this.render(helloworld, {
+		return this.render(PagesComponent, {
 			data: () => {
 				return new Promise((resolve) => {
-					AppApi.pages.getPageData(slug).then((data) => {
-						console.log(data);
+					AppApi.pages.getPageData(slug).then((data: any) => {
+						console.log( data.Page);
+						PagesStore.store.setState({
+							currentPage: data.Page
+						});
 						resolve();
 					});
 				})

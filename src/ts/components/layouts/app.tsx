@@ -16,8 +16,8 @@ export class AppComponent extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                <SideNavComponent/>
-				<Header1Component/>
+                {/*<SideNavComponent/>*/}
+				{/*<Header1Component/>*/}
 				{/*<HeaderComponent/>*/}
                 {this.props.children}
                 {/*<FooterComponent/>*/}

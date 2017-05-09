@@ -24,8 +24,9 @@ export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 	public render() {
 		return (
 			<div>
-				PagesComponent
-				{this.stores.pages.state.currentPage.content}
+				<h1>PagesComponent</h1>
+				<div dangerouslySetInnerHTML={{__html: this.stores.pages.state.currentPage.content}}></div>
+
 			</div>
 		);
 	}
