@@ -53,14 +53,7 @@ export class Api {
 
 	private getExistState(nameOfData: string): any {
 		if (typeof window !== 'undefined') {
-
-			console.log(JSON.stringify(window['_INITIAL_STATE_']) );
-			
-			window['_INITIAL_STATE_'] = JSON.stringify(window['_INITIAL_STATE_']) === '{{{initialState}}}' ? {} : window['_INITIAL_STATE_'];
-
-			let initialState = window['_INITIAL_STATE_'];
-
-			console.log(JSON.stringify(window['_INITIAL_STATE_']));
+			let initialState = JSON.stringify(window['_INITIAL_STATE_']) === '{{{initialState}}}' ? {} : window['_INITIAL_STATE_'];
 
 			if (initialState[nameOfData]) {
 				return initialState[nameOfData];
@@ -72,7 +65,13 @@ export class Api {
 		}
 	}
 
-	public setDataToInitialState() {
+	public setDataToInitialState(nameOfData: string, data: any) {
+		if (nameOfData && typeof window === 'undefined') {
+			if (!global['_INITIAL_STATE_']) {
+				global['_INITIAL_STATE_'] = {}
+			}
 
+			global['_INITIAL_STATE_'][nameOfData] = data;
+		}
 	}
 }
