@@ -2,13 +2,10 @@ import * as React from "react";
 import {TestComponent} from "../components/pages/test-component";
 import {PagesComponent} from "../components/pages/pages-component";
 import {AppController} from "./app-controller";
-import {AppApi} from './../api/app-api';
-
-require('es6-promise').polyfill();
-const fetch = require('isomorphic-fetch');
-
+import {AppApi} from '../api/app-api';
 import {PagesStore} from "../stores/pages";
 import {App1Component} from "../components/layouts/app1";
+import objectAssign = require("object-assign");
 
 
 export class PagesController extends AppController {
@@ -17,7 +14,7 @@ export class PagesController extends AppController {
 	}
 
 	public index(slug) {
-		let dataPromis: Promise<any> = AppApi.pages.getPageData(slug).then((data: any) => {
+		let dataPromise: Promise<any> = AppApi.pages.getPageData(slug).then((data: any) => {
 
 			PagesStore.store.setState({
 				currentPage: data.Page
@@ -26,7 +23,7 @@ export class PagesController extends AppController {
 			return data;
 		});
 
-		return this.render(PagesComponent, dataPromis);
+		return this.render(PagesComponent, dataPromise);
 	}
 
 	public page() {
