@@ -4,6 +4,7 @@ import {ControllersList} from "./controllers/controllers-list";
 import {ControllerRender} from "./lib/controllers/controller";
 import {CONFIG} from "./config";
 import objectAssign = require("object-assign");
+import {AppStore} from "./lib/stores/app";
 
 export class AppRouter {
 
@@ -16,16 +17,38 @@ export class AppRouter {
 					onEnter={(data: RouterState, replace, next) => {
 						let controllers = new ControllersList(data);
 						let parsedParams = this.parseParams(controllers, data);
+						console.log(parsedParams);
 						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
 
 						data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;
-						data.routes[1].component = render.component;
+
+						if (render.component) {
+							data.routes[1].component = render.component;
+						}
 
 						if (server) {
-							render.promises.then(() => {
-								next();
+							render.promises.then((data) => {
+								AppStore.store.setState({
+									appLoading: false
+								} as AppStore.State);
+
+								if (data && data.notFound) {
+									next({
+										status: 404,
+										data: data
+									});
+								} else {
+									next();
+								}
 							});
 						} else {
+							render.promises.then(() => {
+								AppStore.store.setState({
+									appLoading: false
+								} as AppStore.State);
+
+							});
+
 							next();
 						}
 					}}

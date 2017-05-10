@@ -1,15 +1,14 @@
 import * as React from "react";
-import {CommonStore} from "../../stores/common";
-import MetaData = CommonStore.MetaData;
 import {CONFIG} from "../../config";
 import objectAssign = require("object-assign");
+import {AppStore} from "../stores/app";
 
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
 	layout: React.ComponentClass<any>,
-	promises: Promise<any>
+	promises: Promise<any>,
+	notFound?: boolean
 }
-
 
 export interface RenderOptions {
 	promise?: Promise<any>,
@@ -24,6 +23,10 @@ export class Controller {
 		this.hash = data.location.hash;
 		this.search = data.location.search;
 		this.pathname = data.location.pathname;
+
+		AppStore.store.setState({
+			appLoading: true
+		} as AppStore.State);
 	}
 
 	public data;
@@ -33,9 +36,18 @@ export class Controller {
 	public search;
 	public pathname;
 
-	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any> | MetaData>): ControllerRender {
+	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any> | AppStore.MetaData>): ControllerRender {
 
-		let layout: React.ComponentClass<any> = CONFIG.DEFAULT_LAYOUT_COMPONENT
+		AppStore.store.setState({
+			pageNotFound: false
+		} as AppStore.State);
+
+		let layout: React.ComponentClass<any> = CONFIG.DEFAULT_LAYOUT_COMPONENT;
+
+		let promises: Promise<any> = new Promise((resolve) => {
+
+			resolve();
+		});
 
 		args.map((arg: any) => {
 			if (this.isPromise(arg)) {
@@ -47,17 +59,30 @@ export class Controller {
 			}
 		});
 
-
-		let promises: Promise<any> = new Promise((resolve) => {
-			resolve();
-		});
-
 		return {
 			component: component,
 			layout: layout,
 			promises: promises
 		}
 	}
+
+	public pageNotFound(layout: React.ComponentClass<any> = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT): ControllerRender {
+
+		AppStore.store.setState({
+			pageNotFound: true,
+			pageNotFoundComponent: layout
+		} as AppStore.State);
+
+		return {
+			notFound: true,
+			component: null,
+			layout: layout,
+			promises: new Promise((resolve) => {
+				resolve();
+			})
+		}
+	}
+
 
 	public filterData(promis: Promise<any>) {
 		let promises: () => Promise<any> = () => {
@@ -75,8 +100,8 @@ export class Controller {
 		return typeof func.then === 'function';
 	}
 
-	private setMetaData(metaData: MetaData): void {
-		let newMetaData: MetaData = objectAssign({}, CommonStore.store.state.metadata);
+	private setMetaData(metaData: AppStore.MetaData): void {
+		let newMetaData: AppStore.MetaData = objectAssign({}, AppStore.store.state.metadata);
 
 		if (metaData.title) {
 			newMetaData.title = metaData.title;
@@ -94,9 +119,9 @@ export class Controller {
 			newMetaData.keywords = metaData.keywords
 		}
 
-		CommonStore.store.setState({
+		AppStore.store.setState({
 			metadata: newMetaData
-		} as CommonStore.State);
+		} as AppStore.State);
 	}
 
 

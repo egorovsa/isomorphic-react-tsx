@@ -13,8 +13,11 @@ export class PagesController extends AppController {
 		super(data);
 	}
 
-	public index(slug) {
+	public index(slug = 'opt') {
 		let dataPromise: Promise<any> = AppApi.pages.getPageData(slug).then((data: any) => {
+			if (data.length === 0) {
+				return this.pageNotFound();
+			}
 
 			PagesStore.store.setState({
 				currentPage: data.Page
@@ -24,14 +27,14 @@ export class PagesController extends AppController {
 		});
 
 		return this.render(PagesComponent, dataPromise, {
-			title: '12312',
+			title: 'PagesComponent',
 			description: 'description',
 			keywords: 'keywords'
 		});
 	}
 
 	public page() {
-		return this.render(PagesComponent, null, App1Component);
+		return this.render(PagesComponent, App1Component);
 	}
 
 	public page1() {

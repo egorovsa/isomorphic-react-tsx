@@ -38,6 +38,7 @@ export class Api {
 				})
 				.then(function (stories) {
 
+
 					if (nameOfData && typeof window === 'undefined') {
 						if (!global['_INITIAL_STATE_']) {
 							global['_INITIAL_STATE_'] = {}

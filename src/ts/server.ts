@@ -9,7 +9,7 @@ import {ControllersList} from "./controllers/controllers-list";
 import {AppRouter} from "./router";
 import * as serialize from "serialize-javascript";
 import {CONFIG} from "./config";
-import {CommonStore} from "./stores/common";
+import {AppStore} from "./lib/stores/app";
 
 const app = express();
 
@@ -41,28 +41,37 @@ app.use((req, res) => {
 				let controllersList = new ControllersList(nextState);
 				let parsedParams = routing.parseParams(controllersList, nextState);
 
+				console.log(parsedParams);
+
 				if (
 					nextState.params['param0'] &&
 					parsedParams.defaultController &&
 					controllersList[parsedParams.controller][parsedParams.action].length === 0
 				) {
-					return res.status(404).send('Not found');
+					return get404(res);
 				}
 
 				return res.end(getServerHtml(nextState));
 			} else {
-				return res.status(404).send('Not found');
+				return get404(res);
 			}
 		} else {
-			return res.status(500).send(error.message);
+			return get404(res, error.data.layout);
 		}
 	});
 });
 
-function getServerHtml(nextState: any): string {
+function get404(res, layout = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT) {
+	global['_INITIAL_STATE_'] = global['_INITIAL_STATE_'] ? global['_INITIAL_STATE_'] : {};
+	global['_INITIAL_STATE_'].pageNotFound = true;
+
+	return res.status(404).send(getServerHtml({}, layout));
+}
+
+function getServerHtml(nextState: any, component: React.ComponentClass<any> = RouterContext): string {
 	let indexFile = fs.readFileSync(path.join(__dirname, './../index.html'), "utf-8");
 	let template = handlebars.compile(indexFile);
-	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(RouterContext, nextState));
+	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(component, nextState));
 
 	let initialState: string = serialize({}, {
 		isJSON: true
@@ -77,9 +86,9 @@ function getServerHtml(nextState: any): string {
 	return template(
 		{
 			componentHtml: componentHTML,
-			title: CommonStore.store.state.metadata.title,
-			description: CommonStore.store.state.metadata.description,
-			keywords: CommonStore.store.state.metadata.keywords,
+			title: AppStore.store.state.metadata.title,
+			description: AppStore.store.state.metadata.description,
+			keywords: AppStore.store.state.metadata.keywords,
 			initialState: initialState
 		}
 	);

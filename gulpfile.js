@@ -35,7 +35,8 @@ const colors = require('colors');
 const version = packageData.version;
 const port = 3000;
 
-const production = (argv.dev === undefined) ? true : false;
+const production = argv.dev === undefined;
+const serverDev = argv.server !== undefined;
 
 const vendors = [
     'history',
@@ -183,13 +184,19 @@ function fonts() {
 }
 
 function baseHtml() {
+    let initialState = '{}';
+
+    if (serverDev) {
+        initialState = '{{{initialState}}}';
+    }
+
     let templateData = {
         version: version,
         componentHtml: '{{{componentHtml}}}',
         title: '{{{title}}}',
         keywords: '{{{keywords}}}',
         description: '{{{description}}}',
-        initialState: '{{{initialState}}}',
+        initialState: initialState,
     };
 
     let options = {};
