@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4a610bcb-9398-483f-97e3-eb7e3254be9b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/common.styl" afterPath="$PROJECT_DIR$/src/styl/common.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/router.tsx" afterPath="$PROJECT_DIR$/src/ts/router.tsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/layouts/app.tsx" afterPath="$PROJECT_DIR$/src/ts/components/layouts/app.tsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/ui/header1.tsx" afterPath="$PROJECT_DIR$/src/ts/components/ui/header1.tsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -72,16 +73,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gulpfile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="controllers-list.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/controllers/controllers-list.ts">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,18 +106,28 @@
       <file leaf-file-name="app.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/components/layouts/app.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+            <state relative-caret-position="300">
+              <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.styl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="common.styl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styl/common.styl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+            <state relative-caret-position="417">
+              <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header1.tsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ts/components/ui/header1.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="413">
+              <caret line="41" column="41" lean-forward="false" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -213,7 +214,6 @@
         <option value="$PROJECT_DIR$/src/ts/controllers/app-controller.ts" />
         <option value="$PROJECT_DIR$/src/ts/components/layouts/app1.tsx" />
         <option value="$PROJECT_DIR$/src/styl/main-page.styl" />
-        <option value="$PROJECT_DIR$/src/ts/components/ui/header1.tsx" />
         <option value="$PROJECT_DIR$/src/ts/controllers/pages-controller.ts" />
         <option value="$PROJECT_DIR$/src/ts/api.ts" />
         <option value="$PROJECT_DIR$/dist/server/server.js" />
@@ -238,11 +238,12 @@
         <option value="$PROJECT_DIR$/src/ts/lib/api/api.ts" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
-        <option value="$PROJECT_DIR$/src/ts/components/layouts/app.tsx" />
         <option value="$PROJECT_DIR$/src/ts/controllers/pages-controller.tsx" />
         <option value="$PROJECT_DIR$/src/ts/server.ts" />
         <option value="$PROJECT_DIR$/src/ts/router.tsx" />
+        <option value="$PROJECT_DIR$/src/ts/components/layouts/app.tsx" />
         <option value="$PROJECT_DIR$/src/styl/common.styl" />
+        <option value="$PROJECT_DIR$/src/ts/components/ui/header1.tsx" />
       </list>
     </option>
   </component>
@@ -623,7 +624,7 @@
       <workItem from="1494226607952" duration="352000" />
       <workItem from="1494255765176" duration="3612000" />
       <workItem from="1494327343081" duration="11786000" />
-      <workItem from="1494408195612" duration="12952000" />
+      <workItem from="1494408195612" duration="13178000" />
     </task>
     <task id="LOCAL-00001" summary="Router update">
       <created>1494105188032</created>
@@ -713,7 +714,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306329000" />
+    <option name="totallyTimeSpent" value="306555000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -786,13 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/components/ui/header1.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="42" column="35" lean-forward="false" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1069,7 +1063,7 @@
         <state relative-caret-position="500">
           <caret line="25" column="54" lean-forward="false" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
           <folding>
-            <element signature="e#12#47#0" expanded="true" />
+            <element signature="e#12#47#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1110,14 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" column="40" lean-forward="false" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/components/layouts/app.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1164,8 +1150,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styl/common.styl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+        <state relative-caret-position="417">
+          <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/components/layouts/app.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/components/ui/header1.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="41" column="41" lean-forward="false" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
           <folding />
         </state>
       </provider>

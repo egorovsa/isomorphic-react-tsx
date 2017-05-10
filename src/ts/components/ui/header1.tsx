@@ -38,9 +38,9 @@ export class Header1Component extends React.Component<Props, State> {
 						<div className="items">
                 <span className="desktop-menu">
 					<Link to="/" className="active">Главная</Link>
-                    <Link to="/pages/page">Страница 1</Link>
-                    <Link to="/pages/page1">Страница 2</Link>
-                    <Link to="/test">Страница 3</Link>
+                    <Link to="/services">Страница 1</Link>
+                    <Link to="/pages/page">Страница 2</Link>
+                    <Link to="/pages/page1">Страница 3</Link>
                 </span>
 
 							<span className="mobile-menu">
