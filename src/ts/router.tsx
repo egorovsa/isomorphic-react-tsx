@@ -17,7 +17,7 @@ export class AppRouter {
 					onEnter={(data: RouterState, replace, next) => {
 						let controllers = new ControllersList(data);
 						let parsedParams = this.parseParams(controllers, data);
-						console.log(parsedParams);
+
 						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
 
 						data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;

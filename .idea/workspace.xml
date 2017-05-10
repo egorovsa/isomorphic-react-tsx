@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a610bcb-9398-483f-97e3-eb7e3254be9b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/lib/components/app-loading-component.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/lib/components/page-not-found.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/lib/stores/app.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/common.styl" afterPath="$PROJECT_DIR$/src/styl/common.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/client.tsx" afterPath="$PROJECT_DIR$/src/ts/client.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/config.ts" afterPath="$PROJECT_DIR$/src/ts/config.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/controllers/pages-controller.tsx" afterPath="$PROJECT_DIR$/src/ts/controllers/pages-controller.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/lib/api/api.ts" afterPath="$PROJECT_DIR$/src/ts/lib/api/api.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" afterPath="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/router.tsx" afterPath="$PROJECT_DIR$/src/ts/router.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/server.ts" afterPath="$PROJECT_DIR$/src/ts/server.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/stores/common.ts" afterPath="$PROJECT_DIR$/src/ts/stores/common.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/server.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+            <state relative-caret-position="450">
+              <caret line="100" column="40" lean-forward="false" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -51,21 +39,11 @@
       <file leaf-file-name="router.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+            <state relative-caret-position="216">
+              <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="44" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ts/lib/api/api.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -85,8 +63,8 @@
       <file leaf-file-name="controller.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+            <state relative-caret-position="216">
+              <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="8" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -144,6 +122,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="common.styl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/styl/common.styl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -178,7 +166,6 @@
       <find>mainRoute</find>
       <find>any</find>
       <find>setRenderComponent</find>
-      <find>consol</find>
       <find>server</find>
       <find>object-assign</find>
       <find>objectAssign</find>
@@ -186,6 +173,7 @@
       <find>metadata</find>
       <find>Commo</find>
       <find>CommonStore</find>
+      <find>consol</find>
     </findStrings>
     <replaceStrings>
       <replace>url('/fonts/</replace>
@@ -247,14 +235,14 @@
         <option value="$PROJECT_DIR$/src/ts/lib/stores/app.ts" />
         <option value="$PROJECT_DIR$/src/ts/client.tsx" />
         <option value="$PROJECT_DIR$/src/ts/lib/components/app-loading-component.tsx" />
-        <option value="$PROJECT_DIR$/src/styl/common.styl" />
         <option value="$PROJECT_DIR$/src/ts/lib/api/api.ts" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/src/ts/lib/controllers/controller.ts" />
         <option value="$PROJECT_DIR$/src/ts/components/layouts/app.tsx" />
         <option value="$PROJECT_DIR$/src/ts/controllers/pages-controller.tsx" />
-        <option value="$PROJECT_DIR$/src/ts/router.tsx" />
         <option value="$PROJECT_DIR$/src/ts/server.ts" />
+        <option value="$PROJECT_DIR$/src/ts/router.tsx" />
+        <option value="$PROJECT_DIR$/src/styl/common.styl" />
       </list>
     </option>
   </component>
@@ -506,7 +494,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gulp.js.Servers dev">
+  <component name="RunManager" selected="Gulp.js.client dev">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -593,7 +581,7 @@
       <tasks>
         <task>default</task>
       </tasks>
-      <arguments>--dev --server</arguments>
+      <arguments>--dev</arguments>
       <envs />
       <method />
     </configuration>
@@ -635,7 +623,7 @@
       <workItem from="1494226607952" duration="352000" />
       <workItem from="1494255765176" duration="3612000" />
       <workItem from="1494327343081" duration="11786000" />
-      <workItem from="1494408195612" duration="12280000" />
+      <workItem from="1494408195612" duration="12952000" />
     </task>
     <task id="LOCAL-00001" summary="Router update">
       <created>1494105188032</created>
@@ -725,7 +713,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305657000" />
+    <option name="totallyTimeSpent" value="306329000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1063,16 +1051,8 @@
         <state relative-caret-position="374">
           <caret line="38" column="43" lean-forward="false" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styl/common.styl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,16 +1122,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/controllers/pages-controller.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -1162,23 +1132,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
+    <entry file="file://$PROJECT_DIR$/src/ts/server.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+        <state relative-caret-position="450">
+          <caret line="100" column="40" lean-forward="false" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/lib/controllers/controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="8" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/server.ts">
+    <entry file="file://$PROJECT_DIR$/src/ts/router.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state relative-caret-position="216">
+          <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="44" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styl/common.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
