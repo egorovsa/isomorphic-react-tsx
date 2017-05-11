@@ -6,7 +6,7 @@ import {AppStore} from "../stores/app";
 export interface ControllerRender {
 	component: React.ComponentClass<any>,
 	layout: React.ComponentClass<any>,
-	promises: Promise<any>,
+	promises: () => Promise<any>,
 	notFound?: boolean
 }
 
@@ -44,14 +44,18 @@ export class Controller {
 
 		let layout: React.ComponentClass<any> = CONFIG.DEFAULT_LAYOUT_COMPONENT;
 
-		let promises: Promise<any> = new Promise((resolve) => {
+		let promises: () => Promise<any> = () => {
 
-			resolve();
-		});
+			return new Promise((resolve) => {
+				resolve();
+			});
+		};
 
 		args.map((arg: any) => {
 			if (this.isPromise(arg)) {
-				promises = arg;
+				promises = () => {
+					return arg;
+				};
 			} else if (arg.title || arg.description || arg.keywords) {
 				this.setMetaData(arg)
 			} else {
@@ -77,23 +81,12 @@ export class Controller {
 			notFound: true,
 			component: null,
 			layout: layout,
-			promises: new Promise((resolve) => {
-				resolve();
-			})
+			promises: () => {
+				return new Promise((resolve) => {
+					resolve();
+				})
+			}
 		}
-	}
-
-
-	public filterData(promis: Promise<any>) {
-		let promises: () => Promise<any> = () => {
-			return new Promise((resolve) => {
-				resolve();
-			})
-		};
-	}
-
-	public beforeFilter() {
-
 	}
 
 	private isPromise(func: any): boolean {
@@ -121,6 +114,24 @@ export class Controller {
 
 		AppStore.store.setState({
 			metadata: newMetaData
+		} as AppStore.State);
+	}
+
+	public beforeFilter() {
+		return new Promise((next) => {
+			next();
+		})
+	}
+
+	protected hideMainLoading(): void {
+		AppStore.store.setState({
+			appLoading: false
+		} as AppStore.State);
+	}
+
+	protected showMainLoading(): void {
+		AppStore.store.setState({
+			appLoading: true
 		} as AppStore.State);
 	}
 

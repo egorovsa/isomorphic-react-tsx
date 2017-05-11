@@ -18,6 +18,7 @@ export class AppRouter {
 						let controllers = new ControllersList(data);
 						let parsedParams = this.parseParams(controllers, data);
 
+						let beforeFilter: Promise<any> = controllers[parsedParams.controller]['beforeFilter'](...parsedParams.params);
 						let render: ControllerRender = controllers[parsedParams.controller][parsedParams.action](...parsedParams.params);
 
 						data.routes[0].component = render.layout ? render.layout : CONFIG.DEFAULT_LAYOUT_COMPONENT;
@@ -27,26 +28,31 @@ export class AppRouter {
 						}
 
 						if (server) {
-							render.promises.then((data) => {
-								AppStore.store.setState({
-									appLoading: false
-								} as AppStore.State);
+							beforeFilter.then(() => {
+								render.promises().then((data) => {
+									AppStore.store.setState({
+										appLoading: false
+									} as AppStore.State);
 
-								if (data && data.notFound) {
-									next({
-										status: 404,
-										data: data
-									});
-								} else {
-									next();
-								}
+									if (data && data.notFound) {
+										next({
+											status: 404,
+											data: data
+										});
+									} else {
+										next();
+									}
+								});
 							});
 						} else {
-							render.promises.then(() => {
-								AppStore.store.setState({
-									appLoading: false
-								} as AppStore.State);
+							beforeFilter.then((a) => {
+								console.log('qweqwe', a);
+								render.promises().then(() => {
+									AppStore.store.setState({
+										appLoading: false
+									} as AppStore.State);
 
+								});
 							});
 
 							next();

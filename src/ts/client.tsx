@@ -37,7 +37,6 @@ class MainComponent extends StoreComponent<any, any, StoresState> {
 			return (
 				<span>
 					{this.getLoadindPage()}
-					{routing.router()}
 				</span>
 			)
 		}
@@ -54,9 +53,13 @@ class MainComponent extends StoreComponent<any, any, StoresState> {
 
 window.onload = () => {
 	ReactDOM.render(
-		<MainComponent/>,
+		<div>
+			<MainComponent/>
+			{routing.router()}
+		</div>,
 		document.getElementById('app')
-	);
+	)
+	;
 };
 
 

@@ -1,12 +1,10 @@
 import * as React from "react";
-import {TestComponent} from "../components/pages/test-component";
 import {PagesComponent} from "../components/pages/pages-component";
 import {AppController} from "./app-controller";
 import {AppApi} from '../api/app-api';
 import {PagesStore} from "../stores/pages";
 import {App1Component} from "../components/layouts/app1";
 import objectAssign = require("object-assign");
-
 
 export class PagesController extends AppController {
 	constructor(data) {
@@ -23,6 +21,8 @@ export class PagesController extends AppController {
 				currentPage: data.Page
 			});
 
+			// this.hideMainLoading();
+
 			return data;
 		});
 
@@ -37,7 +37,13 @@ export class PagesController extends AppController {
 		return this.render(PagesComponent, App1Component);
 	}
 
-	public page1() {
-		return this.render(TestComponent);
+	public beforeFilter() {
+		return super.beforeFilter().then(() => {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve();
+				}, 5000);
+			})
+		})
 	}
 }
