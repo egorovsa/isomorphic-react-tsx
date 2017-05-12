@@ -70,7 +70,7 @@ export class Controller {
 		}
 	}
 
-	public pageNotFound(layout: React.ComponentClass<any> = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT): ControllerRender {
+	protected pageNotFound(layout: React.ComponentClass<any> = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT): ControllerRender {
 
 		AppStore.store.setState({
 			pageNotFound: true,
@@ -93,7 +93,7 @@ export class Controller {
 		return typeof func.then === 'function';
 	}
 
-	private setMetaData(metaData: AppStore.MetaData): void {
+	protected setMetaData(metaData: AppStore.MetaData): void {
 		let newMetaData: AppStore.MetaData = objectAssign({}, AppStore.store.state.metadata);
 
 		if (metaData.title) {
@@ -117,7 +117,7 @@ export class Controller {
 		} as AppStore.State);
 	}
 
-	public beforeFilter() {
+	protected commonFilter() {
 		return new Promise((next) => {
 			next();
 		})

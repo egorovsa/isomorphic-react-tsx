@@ -12,5 +12,4 @@ export class UtilsService {
 
 		return params;
 	}
-
 }

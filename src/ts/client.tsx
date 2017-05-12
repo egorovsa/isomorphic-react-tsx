@@ -54,7 +54,6 @@ class MainComponent extends StoreComponent<any, any, StoresState> {
 window.onload = () => {
 	ReactDOM.render(
 		<div>
-			<MainComponent/>
 			{routing.router()}
 		</div>,
 		document.getElementById('app')

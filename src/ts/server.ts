@@ -10,6 +10,7 @@ import {AppRouter} from "./router";
 import * as serialize from "serialize-javascript";
 import {CONFIG} from "./config";
 import {AppStore} from "./lib/stores/app";
+import {RouteUtils} from "./lib/utils/route-utils";
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.use((req, res) => {
 
 			if (nextState) {
 				let controllersList = new ControllersList(nextState);
-				let parsedParams = routing.parseParams(controllersList, nextState);
+				let parsedParams = RouteUtils.parseParams(controllersList, nextState);
 
 				console.log(parsedParams);
 

@@ -22,7 +22,7 @@ export namespace AppStore {
 
 	// Store's state initial values
 	let initialState: State = {
-		appLoading: true,
+		appLoading: false,
 		appLoadingComponent: CONFIG.DEFAULT_LOADING_COMPONENT,
 		pageNotFound: false,
 		pageNotFoundComponent: CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT,

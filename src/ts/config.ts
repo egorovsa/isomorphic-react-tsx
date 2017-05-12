@@ -11,7 +11,19 @@ const config = {
 	TITLE: 'Isomorphic react ts',
 	KEYWORDS: 'KEYWORDS',
 	DESCRIPTION: 'DESCRIPTION',
-	API_URL: 'http://metallapriem.ru/api'
+	API_URL: 'http://metallapriem.ru/api',
+	CUSTOM_ROUTES: [
+		{
+			path: '/helloworld',
+			controller: 'pages',
+			action: 'page'
+
+		}, {
+			path: '/cutrom/test1',
+			controller: 'pages',
+			action: 'page'
+		}
+	]
 };
 
 export let CONFIG = config;

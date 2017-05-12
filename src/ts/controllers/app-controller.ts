@@ -5,8 +5,8 @@ export class AppController extends Controller {
 		super(data);
 	}
 
-	public beforeFilter() {
-		return super.beforeFilter().then((dataFromController) => {
+	public commonFilter() {
+		return super.commonFilter().then((dataFromController) => {
 			return new Promise((next) => {
 
 				//some async here...
