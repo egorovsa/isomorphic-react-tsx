@@ -1,6 +1,6 @@
 // store.ts
 import {Store} from "react-stores";
-import {CONFIG} from "../../config";
+import {CONFIG} from "../config";
 import * as React from "react";
 
 export namespace AppStore {
@@ -15,8 +15,6 @@ export namespace AppStore {
 	export interface State {
 		appLoading: boolean,
 		appLoadingComponent: React.ComponentClass<any>,
-		pageNotFound: boolean,
-		pageNotFoundComponent: React.ComponentClass<any>,
 		metadata: MetaData
 	}
 
@@ -24,8 +22,6 @@ export namespace AppStore {
 	let initialState: State = {
 		appLoading: false,
 		appLoadingComponent: CONFIG.DEFAULT_LOADING_COMPONENT,
-		pageNotFound: false,
-		pageNotFoundComponent: CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT,
 		metadata: {
 			title: CONFIG.TITLE,
 			keywords: CONFIG.KEYWORDS,

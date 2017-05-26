@@ -9,15 +9,16 @@
     <meta name="Keywords" content="{{keywords}}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/css/project.css">
+    <!--<script type="text/javascript" src="//api-maps.yandex.ru/2.1/?key=AOo7BlkBAAAAp73eMQIAFU3V3TkMnpTjCllmx8f6YMR8CPIAAAAAAAAAAAAanUSuK5pEWPBRT0aB5xl0SF5xFw==&modules=regions~metro" charset="utf-8"></script>-->
+    <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU" charset="utf-8"></script>
 </head>
 <body>
 
 <div id="app">
     <div>{{componentHtml}}</div>
 </div>
-<script>
-    window['_INITIAL_STATE_'] = {{initialState}};
-</script>
+
+{{{initialState}}}
 <script src="/js/vendor.js"></script>
 <script src="/js/client.js"></script>
 </body>

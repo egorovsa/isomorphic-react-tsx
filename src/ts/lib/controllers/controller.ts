@@ -1,5 +1,5 @@
 import * as React from "react";
-import {CONFIG} from "../../config";
+import {CONFIG} from "../config";
 import objectAssign = require("object-assign");
 import {AppStore} from "../stores/app";
 
@@ -23,10 +23,6 @@ export class Controller {
 		this.hash = data.location.hash;
 		this.search = data.location.search;
 		this.pathname = data.location.pathname;
-
-		AppStore.store.setState({
-			appLoading: true
-		} as AppStore.State);
 	}
 
 	public data;
@@ -37,10 +33,6 @@ export class Controller {
 	public pathname;
 
 	public render(component: React.ComponentClass<any>, ...args: Array<React.ComponentClass<any> | Promise<any> | AppStore.MetaData>): ControllerRender {
-
-		AppStore.store.setState({
-			pageNotFound: false
-		} as AppStore.State);
 
 		let layout: React.ComponentClass<any> = CONFIG.DEFAULT_LAYOUT_COMPONENT;
 
@@ -70,24 +62,24 @@ export class Controller {
 		}
 	}
 
-	protected pageNotFound(layout: React.ComponentClass<any> = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT): ControllerRender {
-
-		AppStore.store.setState({
-			pageNotFound: true,
-			pageNotFoundComponent: layout
-		} as AppStore.State);
-
-		return {
-			notFound: true,
-			component: null,
-			layout: layout,
-			promises: () => {
-				return new Promise((resolve) => {
-					resolve();
-				})
-			}
-		}
-	}
+	// protected pageNotFound(layout: React.ComponentClass<any> = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT): ControllerRender {
+	//
+	// 	AppStore.store.setState({
+	// 		pageNotFound: true,
+	// 		pageNotFoundComponent: layout
+	// 	} as AppStore.State);
+	//
+	// 	return {
+	// 		notFound: true,
+	// 		component: null,
+	// 		layout: layout,
+	// 		promises: () => {
+	// 			return new Promise((resolve) => {
+	// 				resolve();
+	// 			})
+	// 		}
+	// 	}
+	// }
 
 	private isPromise(func: any): boolean {
 		return typeof func.then === 'function';
@@ -135,5 +127,7 @@ export class Controller {
 		} as AppStore.State);
 	}
 
-
+	public copyObject(obj: Object): Object {
+		return objectAssign({}, obj);
+	}
 }

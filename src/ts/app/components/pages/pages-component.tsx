@@ -14,19 +14,17 @@ export interface StoresState {
 	pages: Store<PagesStore.State>
 }
 
-export class TestComponent extends StoreComponent<Props, State, StoresState> {
+export class PagesComponent extends StoreComponent<Props, State, StoresState> {
 	constructor() {
 		super({
 			pages: PagesStore.store
 		});
 	}
 
-
-
 	public render() {
 		return (
-			<div>
-				TestComponent
+			<div className="container">
+				<div className="page-content" dangerouslySetInnerHTML={{__html: this.stores.pages.state.currentPage.content}}></div>
 			</div>
 		);
 	}

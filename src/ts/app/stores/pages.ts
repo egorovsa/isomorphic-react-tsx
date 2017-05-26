@@ -12,7 +12,10 @@ export namespace PagesStore {
 	}
 
 	export interface State {
-		currentPage: Page
+		currentPage: Page,
+		prices: any[],
+		metros: any[],
+		addresses: any[],
 	}
 
 	let initialState: State = {
@@ -23,7 +26,10 @@ export namespace PagesStore {
 			seo_keywords: '',
 			content: '',
 			active: true
-		}
+		},
+		prices: [],
+		metros: [],
+		addresses: []
 	};
 
 	export let store: Store<State> = new Store<State>(initialState);

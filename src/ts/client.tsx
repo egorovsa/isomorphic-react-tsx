@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {AppRouter} from './router';
+import {AppRouter} from './lib/router';
 import {Store, StoreComponent} from "react-stores";
 import {AppStore} from "./lib/stores/app";
-import {CONFIG} from "./config";
+import {CONFIG} from "./lib/config";
 
 let routing = new AppRouter;
 
@@ -18,28 +18,17 @@ class MainComponent extends StoreComponent<any, any, StoresState> {
 		});
 	}
 
-	getPageNotFound(): JSX.Element {
-		return React.createElement(this.stores.app.state.pageNotFoundComponent)
-	}
-
 	getLoadindPage(): JSX.Element {
 		return React.createElement(this.stores.app.state.appLoadingComponent, {active: this.stores.app.state.appLoading})
 	}
 
 	getLayout(): JSX.Element {
-		if (this.stores.app.state.pageNotFound) {
-			return (
-				<span>
-					{this.getPageNotFound()}
-				</span>
-			)
-		} else {
-			return (
-				<span>
+
+		return ( <span>
 					{this.getLoadindPage()}
 				</span>
-			)
-		}
+		)
+
 	}
 
 	public render() {
@@ -54,6 +43,7 @@ class MainComponent extends StoreComponent<any, any, StoresState> {
 window.onload = () => {
 	ReactDOM.render(
 		<div>
+			<MainComponent/>
 			{routing.router()}
 		</div>,
 		document.getElementById('app')

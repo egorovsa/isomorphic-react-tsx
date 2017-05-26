@@ -8,12 +8,12 @@ export interface State {
 
 }
 
-export class PageNotFoundComponent extends React.Component<Props, State> {
+export class FooterComponent extends React.Component<Props, State> {
 	render() {
 		return (
-			<div>
-				404
-			</div>
+			<footer>
+				Footer
+			</footer>
 		);
 	}
 }

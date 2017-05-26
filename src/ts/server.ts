@@ -5,10 +5,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as handlebars from 'handlebars';
 import {match, RouterContext} from 'react-router';
-import {ControllersList} from "./controllers/controllers-list";
-import {AppRouter} from "./router";
+import {ControllersList} from "./app/controllers/controllers-list";
+import {AppRouter} from "./lib/router";
 import * as serialize from "serialize-javascript";
-import {CONFIG} from "./config";
+import {CONFIG} from "./lib/config";
 import {AppStore} from "./lib/stores/app";
 import {RouteUtils} from "./lib/utils/route-utils";
 
@@ -28,6 +28,7 @@ app.use((req, res) => {
 	let routing = new AppRouter();
 	let routes = routing.mainRoute(true);
 
+
 	match({routes, location: req.url}, (error, nextLocation, nextState) => {
 		if (!error) {
 			if (nextState.params['param0'] && isControllerWebroot(nextState.params['param0'])) {
@@ -39,38 +40,29 @@ app.use((req, res) => {
 			}
 
 			if (nextState) {
-				let controllersList = new ControllersList(nextState);
-				let parsedParams = RouteUtils.parseParams(controllersList, nextState);
+				if (!!nextState.params['pageNotFound']) {
 
-				console.log(parsedParams);
-
-				if (
-					nextState.params['param0'] &&
-					parsedParams.defaultController &&
-					controllersList[parsedParams.controller][parsedParams.action].length === 0
-				) {
-					return get404(res);
+					res.writeHead(200, {'Content-Type': 'text/html'});
+					return res.status(404).send(getServerHtml(nextState));
 				}
 
+				res.writeHead(200, {'Content-Type': 'text/html'});
 				return res.end(getServerHtml(nextState));
 			} else {
 				return get404(res);
 			}
 		} else {
-			return get404(res, error.data.layout);
+			return get404(res);
 		}
 	});
 });
 
 function get404(res, layout = CONFIG.DEFAULT_PAGE_NOT_FOUND_COMPONENT) {
-	global['_INITIAL_STATE_'] = global['_INITIAL_STATE_'] ? global['_INITIAL_STATE_'] : {};
-	global['_INITIAL_STATE_'].pageNotFound = true;
-
 	return res.status(404).send(getServerHtml({}, layout));
 }
 
 function getServerHtml(nextState: any, component: React.ComponentClass<any> = RouterContext): string {
-	let indexFile = fs.readFileSync(path.join(__dirname, './../index.html'), "utf-8");
+	let indexFile = fs.readFileSync(path.join(__dirname, './../indexServer.html'), "utf-8");
 	let template = handlebars.compile(indexFile);
 	let componentHTML: string = ReactDOMServer.renderToString(React.createElement(component, nextState));
 

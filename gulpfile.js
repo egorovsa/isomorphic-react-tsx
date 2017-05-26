@@ -25,6 +25,7 @@ const minifyCss = require('gulp-minify-css');
 const uglify = require('gulp-uglify');
 const htmlmin = require('gulp-htmlmin');
 const jsonminify = require('gulp-jsonminify');
+const stripDebug = require('gulp-strip-debug');
 const exit = require('gulp-exit');
 const exorcist = require('exorcist');
 const argv = require('yargs').argv;
@@ -35,8 +36,7 @@ const colors = require('colors');
 const version = packageData.version;
 const port = 3000;
 
-const production = argv.dev === undefined;
-const serverDev = argv.server !== undefined;
+const production = !argv.dev;
 
 const vendors = [
     'history',
@@ -183,12 +183,24 @@ function fonts() {
         .pipe(gulp.dest('dist/webroot/fonts'));
 }
 
-function baseHtml() {
-    let initialState = '{}';
+function baseHtmlServer() {
+    let templateData = {
+        version: version,
+        componentHtml: '{{{componentHtml}}}',
+        title: '{{{title}}}',
+        keywords: '{{{keywords}}}',
+        description: '{{{description}}}',
+        initialState: '<script>window["_INITIAL_STATE_"] = {{{initialState}}}</script>',
+    };
 
-    if (serverDev) {
-        initialState = '{{{initialState}}}';
-    }
+    return gulp.src('src/index.hbs')
+        .pipe(gulpHandlebars(templateData, {}))
+        .pipe(rename('indexServer.html'))
+        .pipe(gulp.dest('dist'))
+        .pipe(browserSync.stream());
+}
+
+function baseHtmlClient() {
 
     let templateData = {
         version: version,
@@ -196,13 +208,11 @@ function baseHtml() {
         title: '{{{title}}}',
         keywords: '{{{keywords}}}',
         description: '{{{description}}}',
-        initialState: initialState,
+        initialState: '',
     };
 
-    let options = {};
-
     return gulp.src('src/index.hbs')
-        .pipe(gulpHandlebars(templateData, options))
+        .pipe(gulpHandlebars(templateData, {}))
         .pipe(rename('index.html'))
         .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
@@ -236,26 +246,52 @@ gulp.task('images', ['fonts'], function () {
     return images();
 });
 
-gulp.task('baseHtml', ['images'], function () {
-    return baseHtml();
+gulp.task('baseHtmlClient', ['images'], function () {
+    return baseHtmlClient();
 });
 
-gulp.task('css-minify', ['baseHtml'], function () {
-    return gulp.src('dist/css/project.css')
-        .pipe(minifyCss())
-        .pipe(gulp.dest('dist/css'));
+gulp.task('baseHtmlServer', ['baseHtmlClient'], function () {
+    return baseHtmlServer();
 });
 
-gulp.task('browser-sync', ['css-minify'], function () {
-    return browserSync.init({
-        codeSync: true,
-        logPrefix: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
-        open: false,
-        ui: {
-            port: port
-        },
-        proxy: 'http://localhost:' + (port + 1)
-    });
+gulp.task('css-minify', ['baseHtmlServer'], function () {
+    if (production) {
+        return gulp.src('dist/webroot/css/project.css')
+            .pipe(minifyCss())
+            .pipe(gulp.dest('dist/webroot/css'));
+    } else {
+        return true;
+    }
+});
+
+gulp.task('js-minify', ['css-minify'], function () {
+    if (production) {
+        return gulp.src(['dist/webroot/js/client.js', 'dist/webroot/js/vendor.js'])
+        // .pipe(sourcemaps.init())
+            .pipe(plumber())
+            .pipe(stripDebug())
+            .pipe(uglify())
+            // .pipe(sourcemaps.write('../maps'))
+            .pipe(gulp.dest('dist/webroot/js'));
+    } else {
+        return true;
+    }
+});
+
+gulp.task('browser-sync', ['js-minify'], function () {
+    if (!production) {
+        return browserSync.init({
+            codeSync: true,
+            logPrefix: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
+            open: false,
+            ui: {
+                port: port
+            },
+            proxy: 'http://localhost:' + (port + 1)
+        });
+    } else {
+        return true;
+    }
 });
 
 gulp.task('webroot', ['browser-sync'], function () {
@@ -263,61 +299,64 @@ gulp.task('webroot', ['browser-sync'], function () {
 });
 
 gulp.task('default', ['webroot'], function () {
-    startExpress(port + 1);
+    if (!production) {
+        startExpress(port + 1);
 
-    gulp.watch([
-        'src/ts/server.ts',
-    ], function () {
-        cleanServer();
-        typeScriptCompile();
+        gulp.watch([
+            'src/ts/server.ts',
+        ], function () {
+            cleanServer();
+            typeScriptCompile();
 
-        console.log('Server build'.blue);
-    });
+            console.log('Server build'.blue);
+        });
 
-    gulp.watch([
-        './src/webroot/*',
-        './src/webroot/*.**',
-        './src/webroot/**/*.**',
-    ], function () {
-        webroot();
-    });
+        gulp.watch([
+            './src/webroot/*',
+            './src/webroot/*.**',
+            './src/webroot/**/*.**',
+        ], function () {
+            webroot();
+        });
 
-    gulp.watch([
-        './src/ts/*.ts',
-        './src/ts/**/*.ts',
-        './src/ts/**/*.tsx',
-        '!./src/ts/server.ts'
-    ], function () {
-        cleanServer();
-        typeScriptCompile();
-        bundle();
-    });
+        gulp.watch([
+            './src/ts/*.ts',
+            './src/ts/**/*.ts',
+            './src/ts/**/*.tsx',
+            '!./src/ts/server.ts'
+        ], function () {
+            cleanServer();
+            typeScriptCompile();
+            bundle();
+        });
 
-    gulp.watch([
-        './src/*.hbs'
-    ], function () {
-        baseHtml();
-    });
+        gulp.watch([
+            './src/*.hbs'
+        ], function () {
+            baseHtmlServer();
+            baseHtmlClient();
+        });
 
-    gulp.watch([
-        './src/img/*',
-        './src/img/*.**',
-        './src/img/**/*.**'
-    ], function () {
-        images();
-    });
+        gulp.watch([
+            './src/img/*',
+            './src/img/*.**',
+            './src/img/**/*.**'
+        ], function () {
+            images();
+        });
 
-    gulp.watch([
-        './src/fonts/**/*'
-    ], function () {
-        fonts();
-    });
+        gulp.watch([
+            './src/fonts/**/*'
+        ], function () {
+            fonts();
+        });
 
-    gulp.watch([
-        './src/styl/**/*.styl'
-    ], function () {
-        stylusCompile();
-    });
+        gulp.watch([
+            './src/styl/**/*.styl'
+        ], function () {
+            stylusCompile();
+        });
+    }
 });
 
 

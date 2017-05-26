@@ -3,11 +3,16 @@ const fetch = require('isomorphic-fetch');
 
 export class Api {
 
-	protected request(url: string, nameOfData?: string): Promise<any> {
+	protected request(url: string, nameOfData?: string, checkExist: boolean = true): Promise<any> {
 		return new Promise((resolve, reject) => {
 
 			if (nameOfData) {
-				let existsData = this.getExistState(nameOfData);
+
+				let existsData = '';
+
+				if (checkExist) {
+					existsData = this.getExistInitialState(nameOfData);
+				}
 
 				if (existsData) {
 					resolve(existsData);
@@ -52,9 +57,9 @@ export class Api {
 		})
 	}
 
-	private getExistState(nameOfData: string): any {
-		if (typeof window !== 'undefined') {
-			let initialState = JSON.stringify(window['_INITIAL_STATE_']) === '{{{initialState}}}' ? {} : window['_INITIAL_STATE_'];
+	public getExistInitialState(nameOfData: string): any {
+		if (typeof window !== 'undefined' && window['_INITIAL_STATE_']) {
+			let initialState = window['_INITIAL_STATE_'];
 
 			if (initialState[nameOfData]) {
 				return initialState[nameOfData];

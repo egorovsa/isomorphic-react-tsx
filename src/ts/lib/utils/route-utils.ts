@@ -1,6 +1,6 @@
 import {Router, Route, IndexRoute, browserHistory, RouterState} from 'react-router';
-import {CONFIG} from "../../config";
-import {ControllersList} from "../../controllers/controllers-list";
+import {CONFIG} from "../config";
+import {ControllersList} from "../../app/controllers/controllers-list";
 import objectAssign = require("object-assign");
 
 export class RouteUtils {
@@ -38,7 +38,11 @@ export class RouteUtils {
 			let path = RouteUtils.setSlashToPath(route.path);
 			let pathName = RouteUtils.setSlashToPath(data.location.pathname);
 
-			if (pathName.indexOf(path) === 0) {
+			if (route.path === data.location.pathname) {
+				controller = route.controller;
+				action = route.action;
+				countRemove = RouteUtils.removeLastSlash(path).split('/').length
+			} else if (route.path !== '/' && pathName.indexOf(path) === 0) {
 				controller = route.controller;
 				action = route.action;
 				countRemove = RouteUtils.removeLastSlash(path).split('/').length
@@ -54,14 +58,10 @@ export class RouteUtils {
 
 	static parseParams(controllers: ControllersList, data: RouterState) {
 
-		let customRoutes = this.parseCustomRoutes(data);
-
-		let params: Router.Params = objectAssign({}, data.params);
-
 		let controller = '';
 		let action = CONFIG.DEFAULT_ACTION;
-		let defaultController: boolean = false;
-		let defaultAction: boolean = false;
+		let customRoutes = this.parseCustomRoutes(data);
+		let params: Router.Params = objectAssign({}, data.params);
 
 		if (customRoutes.controller) {
 			controller = customRoutes.controller;
@@ -78,22 +78,16 @@ export class RouteUtils {
 					action = params['param1'];
 
 					delete params['param1'];
-				} else {
-					defaultAction = true;
 				}
 
 				delete params['param0'];
-			} else {
-				defaultController = true;
 			}
 		}
 
 		return {
 			controller: controller,
 			action: action,
-			params: this.paramsToArray(params),
-			defaultController: defaultController,
-			defaultAction: defaultAction
+			params: this.paramsToArray(params)
 		}
 	}
 

@@ -1,4 +1,4 @@
-import {Controller} from "../lib/controllers/controller";
+import {Controller} from "../../lib/controllers/controller";
 
 export class AppController extends Controller {
 	constructor(data) {
@@ -7,12 +7,10 @@ export class AppController extends Controller {
 
 	public commonFilter() {
 		return super.commonFilter().then((dataFromController) => {
+
 			return new Promise((next) => {
-
-				//some async here...
 				next();
-
-			})
+			});
 		})
 	}
 }
